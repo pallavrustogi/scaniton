@@ -34,6 +34,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
 	<script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
+	
 </head>
 
 <body>
@@ -93,12 +94,12 @@
 
                     <p>Click here to create a QR Code</p>
                     <p class="">
-                        <a class="btn btn-primary btn-large">Generate QR »</a>
+                        <a id="generate" class="btn btn-primary btn-large">Generate QR »</a> <div id="qrcode"></div>
                     </p>
                     <h1>Step 2</h1>
                     <p>Click here to print QR Code</p>
                     <p class="">
-                        <a class="btn btn-primary btn-large">Print QR »</a>
+                        <a id="print" class="btn btn-primary btn-large">Print QR »</a>
                     </p>
                     <h1>Step 3</h1>
                     <p>Slip it in your package</p>
@@ -121,6 +122,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
     </script>
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="jquery.qrcode.min.js"></script>
 	<script type="text/javascript">
 		Parse.initialize("SN9RAjbHn5ofcwqjshAYG0jRZnxQrMgZ6Xj3rJWh", "HX9VdqSqHXGxBQqXMBFBCASVLUiWrkAC2WPI1Pcb");
 </script>
@@ -133,6 +135,49 @@
 				}else
 				{console.log("no user");}
 			});
+	</script>
+	<script type = "text/javascript">
+	$(document).ready(function(){
+				$('#generate').click(function() {
+				$('#qrcode').html("");
+					var QrCode = Parse.Object.extend("qr_url");
+					var qrcode = new QrCode();
+					var currentUser = Parse.User.current();
+					qrcode.set("createdBy", currentUser);						 
+					qrcode.save(null, {
+					  success: function(qrcode) {
+						// Execute any logic that should take place after the object is saved.
+						//alert('New object created with objectId: ' + qrcode.id);
+						$('#qrcode').qrcode("http://www.scaniton.com?id=" + qrcode.id);
+					  },
+					  error: function(qrcode, error) {
+						// Execute any logic that should take place if the save fails.
+						// error is a Parse.Error with an error code and description.
+						//alert('Failed to create new object, with error code: ' + error.description);
+					  }
+					});
+					
+				});
+			});
+	</script>
+	<script>
+	$(function(){
+  $('#print').click(function(){
+    
+	var dataUrl = document.getElementById("qr").toDataURL()
+	var windowContent = '<!DOCTYPE html>';
+    windowContent += '<html>'
+    windowContent += '<head><title>Scaniton</title></head>';
+    windowContent += '<body>'
+    windowContent += '<img src="' + dataUrl + '">';
+    windowContent += '</body>';
+    windowContent += '</html>';
+	printMe=window.open();
+    printMe.document.write(windowContent);
+    printMe.print();
+    printMe.close();
+  });
+});
 	</script>
 </body>
 
