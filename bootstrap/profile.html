@@ -3,45 +3,21 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Scaniton</title>
+    <title>Bootstrap, from Twitter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <!-- Le styles -->
     <!-- TODO: make sure bootstrap.min.css points to BootTheme generated file
         -->
     <link href="bootstrap.min.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         body {
-            padding-top: 20px;
+            padding-top: 60px;
             padding-bottom: 40px;
         }
-        /* Custom container */
-        .container-narrow {
-            margin: 0 auto;
-            max-width: 700px;
-        }
-        .container-narrow > hr {
-            margin: 30px 0;
-        }
-        /* Main marketing message and sign up button */
-        .jumbotron {
-            margin: 60px 0;
-            text-align: center;
-        }
-        .jumbotron h1 {
-            font-size: 72px;
-            line-height: 1;
-        }
-        .jumbotron .btn {
-            font-size: 21px;
-            padding: 14px 24px;
-        }
-        /* Supporting marketing content */
-        .marketing {
-            margin: 60px 0;
-        }
-        .marketing p + h4 {
-            margin-top: 28px;
+        .sidebar-nav {
+            padding: 9px 0;
         }
     </style>
     <!-- TODO: make sure bootstrap-responsive.min.css points to BootTheme
@@ -57,12 +33,107 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-	<link href='main.css' rel='stylesheet'>
-	
+	<script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
 </head>
 
 <body>
-    <p> Under construction </p>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+
+                </a>
+                <a class="brand" href="#">Scaniton</a>
+                <div class="nav-collapse collapse">
+                    <p class="navbar-text pull-right">Logged in as
+                        <a id="user" href="#" class="navbar-link">Username</a>
+                    </p>
+                    <ul class="nav">
+                        <li class="active">
+                            <a href="#">Home</a>
+                        </li>
+                        <li>
+                            <a href="#about">About</a>
+                        </li>
+                        <li>
+                            <a href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3">
+                <div class="well sidebar-nav">
+                    <ul class="nav nav-list">
+                        <li class="nav-header">To Do</li>
+                        <li class="active">
+                            <a href="#">Create New</a>
+                        </li>
+                        <li>
+                            <a href="#">Track Packages</a>
+                        </li>
+                        <li>
+                            <a href="#"></a>
+                        </li>
+
+                    </ul>
+                </div>
+                <!--/.well -->
+            </div>
+            <!--/span-->
+            <div class="span9">
+                <div class="hero-unit">
+                    <h1>Step 1</h1>
+
+                    <p>Click here to create a QR Code</p>
+                    <p class="">
+                        <a class="btn btn-primary btn-large">Generate QR »</a>
+                    </p>
+                    <h1>Step 2</h1>
+                    <p>Click here to print QR Code</p>
+                    <p class="">
+                        <a class="btn btn-primary btn-large">Print QR »</a>
+                    </p>
+                    <h1>Step 3</h1>
+                    <p>Slip it in your package</p>
+
+                </div>
+
+                <!--/row-->
+            </div>
+            <!--/span-->
+        </div>
+        <!--/row-->
+        <hr>
+        <footer>
+            <p>© Scaniton 2013. QR Code is a registered trademark of DENSO WAVE INCORPORATED
+            </p>
+        </footer>
+    </div>
+    <!--/.fluid-container-->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+    </script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		Parse.initialize("SN9RAjbHn5ofcwqjshAYG0jRZnxQrMgZ6Xj3rJWh", "HX9VdqSqHXGxBQqXMBFBCASVLUiWrkAC2WPI1Pcb");
+</script>
+<script type = "text/javascript">
+	$(document).ready(function(){
+				var currentUser = Parse.User.current();
+				if (currentUser) {
+				console.log(currentUser.attributes.full_name);
+				$("#user").html(currentUser.attributes.full_name);
+				}else
+				{console.log("no user");}
+			});
+	</script>
 </body>
 
 </html>
