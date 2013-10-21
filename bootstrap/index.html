@@ -18,7 +18,7 @@
         /* Custom container */
         .container-narrow {
             margin: 0 auto;
-            max-width: 700px;
+            max-width: 1200px;
         }
         .container-narrow > hr {
             margin: 30px 0;
@@ -75,20 +75,26 @@
                     <a href="#Contact">Contact</a>
                 </li>
 				<li>
-                    <input id="uemail" type="email" placeholder="Email" />
-                </li>
+					<input id="uemail" type="email" placeholder="Email" />
+				</li>
 				<li>
-                    <input id="upass"  type="password" placeholder="Password" />
-                </li>
+					<input id="upass"  type="password" placeholder="Password" />
+				</li>
 				<li>
 					<input id="signin"  class="btn btn-success" type="submit" value="Sign In" />
 					
 				</li>
 				<li>
-				<div id="oopssignin" style="display:none;">
-					<p>&nbsp;&nbsp;&nbsp;Wrong username or password</p>
-					</div>
+					<p id="oopssignin" style="display:none;">&nbsp;&nbsp;&nbsp;Wrong username or password</p>		
 				</li>
+				<li>
+					<a id="login" href="profile.html" style="display:none;">Welcome!</a>
+				</li>
+				<li>
+					<input id="logout"  class="btn btn-success" type="submit" value="Logout" style="display:none;" />
+					
+				</li>
+				
             </ul>
             <h3 class="muted"><br></h3>
 
@@ -257,7 +263,20 @@ $("#buttonProductionSummary").click(function(e) {
 					  }
 					});
 				});
+				var currentUser = Parse.User.current();
+				if (currentUser) {
+				console.log(currentUser.attributes.full_name);
+				$("#login").html("Welcome! "+currentUser.attributes.full_name);
+				$("#login").show();
+				$("#logout").show();
+				$("#uemail").hide();
+				$("#upass").hide();
+				$("#signin").hide();
+				} else {
+				console.log("no user");
+				}
 			});
+			
 	</script>
 	
 	<script type = "text/javascript">
@@ -266,6 +285,15 @@ $("#buttonProductionSummary").click(function(e) {
 					Parse.User.logIn($("#uemail").val(), $("#upass").val(), {
 						success: function(user) {
 							console.log("pass");
+							var currentUser = Parse.User.current();
+							if (currentUser) {
+							$("#login").html("Welcome! "+currentUser.attributes.full_name);
+							$("#login").show();
+							$("#logout").show();
+							$("#uemail").hide();
+							$("#upass").hide();
+							$("#signin").hide();
+							}
 							document.location.href = 'profile.html';
 						},
 						error: function(user, error) {
@@ -273,6 +301,19 @@ $("#buttonProductionSummary").click(function(e) {
 							$("#oopssignin").show();
 						}
 					});
+				});
+			});
+	</script>
+	
+	<script type = "text/javascript">
+	$(document).ready(function(){
+				$('#logout').click(function() {
+					Parse.User.logOut();
+					$("#login").hide();
+					$("#logout").hide();
+					$("#uemail").show();
+					$("#upass").show();
+					$("#signin").show();
 				});
 			});
 	</script>
