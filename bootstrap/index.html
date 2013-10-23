@@ -112,7 +112,7 @@
 					<input id="semail" type="email" placeholder="Email" />
 					<input id="spass"  type="password" placeholder="Password" />
 				</div>
-				<input id="signup"  class="btn btn-large btn-success" type="submit" value="Sign up today" />
+				<input id="signup"  class="btn btn-large btn-success" value="Sign up today" />
 			</form>
 			</div>
 			<div id="tysignup" style="display:none;">
@@ -242,43 +242,46 @@ $("#buttonProductionSummary").click(function(e) {
 <script type = "text/javascript">
 	$(document).ready(function(){
 				$('#signup').click(function() {
-					console.log("hello");
+					//console.log("hello");
 					var user = new Parse.User();
 					user.set("full_name", $("#sname").val());
 					user.set("password", $("#spass").val());
 					user.set("email", $("#semail").val());
 					user.set("username", $("#semail").val());
 					// other fields can be set just like with Parse.Object
+					//alert($("#sname").val() + $("#spass").val()+ $("#semail").val());
 					user.signUp(null, {
 					  success: function(user) {
+					 // alert('success');
 						console.log("pass");
 						$("#tysignup").show();
 						$("#divsignup").hide();
+						var currentUser = Parse.User.current();
+							if (currentUser) {
+							$("#login").html("Welcome! "+currentUser.attributes.full_name);
+							$("#login").show();
+							$("#logout").show();
+							$("#uemail").hide();
+							$("#upass").hide();
+							$("#signin").hide();
+							}
 					  },
 					  error: function(user, error) {
 						// Show the error message somewhere and let the user try again.
+					//	alert("Error: " + error.code + " " + error.message);
+						var codeString = '' + error.code;
+						Parse.Analytics.track('error', { code: codeString });
 						console.log("fail");
 						$("#oopssignup").show();
 						$("#divsignup").hide();
 					  }
 					});
+					console.log("hello");
 				});
-				var currentUser = Parse.User.current();
-				if (currentUser) {
-				console.log(currentUser.attributes.full_name);
-				$("#login").html("Welcome! "+currentUser.attributes.full_name);
-				$("#login").show();
-				$("#logout").show();
-				$("#uemail").hide();
-				$("#upass").hide();
-				$("#signin").hide();
-				} else {
-				console.log("no user");
-				}
+				
 			});
-			
 	</script>
-	
+		
 	<script type = "text/javascript">
 	$(document).ready(function(){
 				$('#signin').click(function() {
@@ -293,8 +296,30 @@ $("#buttonProductionSummary").click(function(e) {
 							$("#uemail").hide();
 							$("#upass").hide();
 							$("#signin").hide();
+							var url = document.location.toString();
+				if(url.match('id'))
+					{var qr_code=url.split('=')[1];
+				var Logger = Parse.Object.extend("qr_logger");
+					var logger = new Logger();
+					
+					
+					logger.set("createdBy", currentUser);
+					logger.set("qr_id", qr_code);					
+					logger.save(null, {
+					  success: function(logger) {
+						// Execute any logic that should take place after the object is saved.
+						//alert('New object created with objectId: ' + qrcode.id);
+						
+					  },
+					  error: function(logger, error) {
+						// Execute any logic that should take place if the save fails.
+						// error is a Parse.Error with an error code and description.
+						//alert('Failed to create new object, with error code: ' + error.description);
+					  }
+					});
+				}
 							}
-							document.location.href = 'profile.html';
+							//document.location.href = 'profile.html';
 						},
 						error: function(user, error) {
 							console.log("fail");
@@ -315,6 +340,78 @@ $("#buttonProductionSummary").click(function(e) {
 					$("#upass").show();
 					$("#signin").show();
 				});
+			});
+	</script>
+	<script type = "text/javascript">
+	$(document).ready(function(){
+				var currentUser = Parse.User.current();
+				if (currentUser) {
+				console.log(currentUser.attributes.full_name);
+				$("#login").html("Welcome! "+currentUser.attributes.full_name);
+				$("#login").show();
+				$("#logout").show();
+				$("#uemail").hide();
+				$("#upass").hide();
+				$("#signin").hide();
+				var url = document.location.toString();
+				if(url.match('id'))
+					{var qr_code=url.split('=')[1];
+				var Logger = Parse.Object.extend("qr_logger");
+					var logger = new Logger();
+					
+					var Qrurl = Parse.Object.extend("qr_url");
+					var query = new Parse.Query(Qrurl);
+					query.get(qr_code, {
+					  success: function(qrurl) {
+								logger.set("createdBy", currentUser);
+								logger.set("qrid", qrurl);
+								console.log(qrurl.id);
+								logger.save(null, {
+								  success: function(logger) {
+									// Execute any logic that should take place after the object is saved.
+									//alert('New object created with objectId: ' + qrcode.id);
+									
+								  },
+								  error: function(logger, error) {
+									// Execute any logic that should take place if the save fails.
+									// error is a Parse.Error with an error code and description.
+									//alert('Failed to create new object, with error code: ' + error.description);
+								  }
+								});
+					  },
+					  error: function(object, error) {
+						// The object was not retrieved successfully.
+						// error is a Parse.Error with an error code and description.
+					  }
+					});
+					
+					
+					}
+				} else {
+				var url = document.location.toString();
+				if(url.match('id'))
+					{var qr_code=url.split('=')[1];
+				var Logger = Parse.Object.extend("qr_logger");
+					var logger = new Logger();
+					
+					
+					//logger.set("createdBy", currentUser);
+					logger.set("qr_id", qr_code);					
+					logger.save(null, {
+					  success: function(logger) {
+						// Execute any logic that should take place after the object is saved.
+						//alert('New object created with objectId: ' + qrcode.id);
+						
+					  },
+					  error: function(logger, error) {
+						// Execute any logic that should take place if the save fails.
+						// error is a Parse.Error with an error code and description.
+						//alert('Failed to create new object, with error code: ' + error.description);
+					  }
+					});
+				}
+				
+			}
 			});
 	</script>
 </body>

@@ -73,11 +73,11 @@
                 <div class="well sidebar-nav">
                     <ul class="nav nav-list">
                         <li class="nav-header">To Do</li>
-                        <li class="active">
+                        <li>
                             <a href="#">Create New</a>
                         </li>
-                        <li>
-                            <a href="track.html">Track Packages</a>
+                        <li class="active">
+                            <a href="#">Track Packages</a>
                         </li>
                         <li>
                             <a href="#"></a>
@@ -90,19 +90,9 @@
             <!--/span-->
             <div class="span9">
                 <div class="hero-unit">
-                    <h1>Step 1</h1>
-
-                    <p>Click here to create a QR Code</p>
-                    <p class="">
-                        <a id="generate" class="btn btn-primary btn-large">Generate QR »</a> <div id="qrcode"></div>
-                    </p>
-                    <h1>Step 2</h1>
-                    <p>Click here to print QR Code</p>
-                    <p class="">
-                        <a id="print" class="btn btn-primary btn-large">Print QR »</a>
-                    </p>
-                    <h1>Step 3</h1>
-                    <p>Slip it in your package</p>
+                    <h1>Your Packages</h1>
+					<div id="main">
+					</div>
 
                 </div>
 
@@ -132,53 +122,34 @@
 				if (currentUser) {
 				console.log(currentUser.attributes.full_name);
 				$("#user").html(currentUser.attributes.full_name);
+				var QrUrl = Parse.Object.extend("qr_url");
+				var query = new Parse.Query(QrUrl);
+				query.equalTo("createdBy", currentUser);
+				query.find({
+				  success: function(results) {
+					//alert("Successfully retrieved " + results.length + " scores.");
+					// Do something with the returned Parse.Object values
+					var htmlContent="";
+					for (var i = 0; i < results.length; i++) { 
+					  var object = results[i];
+					  htmlContent+="<li><p><a href=\"#\" class=\"package\">"+object.id+"</a></p></li>";
+					}
+					$("#main").html("<ul>"+htmlContent+"</ul>");
+				  },
+				  error: function(error) {
+					alert("Error: " + error.code + " " + error.message);
+				  }
+				});
+				$("#main").on('click', 'a', function(){
+				$(this).html("hello!! Under construction");});
 				}else
 				{console.log("no user");}
 			});
 	</script>
-	<script type = "text/javascript">
-	$(document).ready(function(){
-				$('#generate').click(function() {
-				$('#qrcode').html("");
-					var QrCode = Parse.Object.extend("qr_url");
-					var qrcode = new QrCode();
-					var currentUser = Parse.User.current();
-					qrcode.set("createdBy", currentUser);						 
-					qrcode.save(null, {
-					  success: function(qrcode) {
-						// Execute any logic that should take place after the object is saved.
-						//alert('New object created with objectId: ' + qrcode.id);
-						$('#qrcode').qrcode("http://www.scaniton.com?id=" + qrcode.id);
-					  },
-					  error: function(qrcode, error) {
-						// Execute any logic that should take place if the save fails.
-						// error is a Parse.Error with an error code and description.
-						//alert('Failed to create new object, with error code: ' + error.description);
-					  }
-					});
-					
-				});
-			});
-	</script>
-	<script>
-	$(function(){
-  $('#print').click(function(){
-    
-	var dataUrl = document.getElementById("qr").toDataURL()
-	var windowContent = '<!DOCTYPE html>';
-    windowContent += '<html>'
-    windowContent += '<head><title>Scaniton</title></head>';
-    windowContent += '<body>'
-    windowContent += '<img src="' + dataUrl + '">';
-    windowContent += '</body>';
-    windowContent += '</html>';
-	printMe=window.open();
-    printMe.document.write(windowContent);
-    printMe.print();
-    printMe.close();
-  });
-});
-	</script>
+	
+	
+	
+	
 </body>
 
 </html>
