@@ -9,6 +9,8 @@
         <link href="css/main.css" rel="stylesheet">
 
         <link rel="shortcut icon" href="images/favicon.ico">
+        
+    <script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
 
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
         <!--[if lt IE 9]>
@@ -154,13 +156,19 @@
 
                     <div class="col-md-6 pull-right gallery-popup">
                         <h3 align ="center">Register </h3>
-                        <form id="signup">
-                        <input type="text" id="name" name="name" class="form-control input-hg" placeholder="Full Name" />
-                        <input type="text" id="email" name="email" class="form-control input-hg" placeholder="Email" />
+                        <form id="signupform">
+                        <input type="text" id="sname" name="name" class="form-control input-hg" placeholder="Full Name" />
+                        <input type="text" id="semail" name="email" class="form-control input-hg" placeholder="Email" />
                        
-                        <input type="password" class="form-control input-hg" id="password" placeholder="Password">
-                        <button type="submit" class="btn btn-inverse btn-hg btn-block" name="submit">Sign Up!</button>
+                        <input type="password" class="form-control input-hg" id="spassword" placeholder="Password">
+                        <button id="signup" type="submit" class="btn btn-inverse btn-hg btn-block" name="submit">Sign Up!</button>
                     </form>
+                    <div id="tysignup" style="display:none;">
+            <h3>Thank you for registering. Please verify your email</h3>
+            </div>
+            <div id="oopssignup" style="display:none;">
+            <h3>Oops! Something went wrong. Please refresh the page and try again.</h3>
+            </div>
                     </div> 
 
                     <div class="col-md-6 pull-left">
