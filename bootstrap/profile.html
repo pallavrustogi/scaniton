@@ -46,17 +46,21 @@
                     <span class="icon-bar"></span>
 
                 </a>
-                <a class="brand" href="#">Scaniton</a>
+                <a class="brand" href="http://www.scaniton.com" style="padding-top:5px;padding-bottom:0px;"><img src="img/logo.png" width="140px" height="37px"/></a>
                 <div class="nav-collapse collapse">
-                    <p class="navbar-text pull-right">Logged in as
+
+                    <p class="navbar-text pull-right" style="padding-left:10px;"> 
+                        <input id="logout"  class="btn btn-success" type="submit" value="Logout" style="margin-top:0px;"/>
+                    </p>
+                    <p class="navbar-text pull-right" style="padding-left:10px;">Logged in as
                         <a id="user" href="#" class="navbar-link">Username</a>
                     </p>
-                    <ul class="nav">
+                    <ul class="nav pull-right">
                         <li class="active">
-                            <a href="index.html">Home</a>
+                            <a href="profile.html">Create</a>
                         </li>
                         <li>
-                            <a href="index.html#About">About</a>
+                            <a href="track.html">Track</a>
                         </li>
                         <li>
                             <a href="index.html#Contact">Contact</a>
@@ -178,6 +182,14 @@
     printMe.close();
   });
 });
+
+    $(document).ready(function(){
+                $('#logout').click(function() {
+                    Parse.User.logOut();
+                    window.location.href="http://scaniton.com"
+                });
+            });
+
 	</script>
 </body>
 
