@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Scaniton</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- TODO: make sure bootstrap.min.css points to BootTheme generated file
+        -->
+    <link href="bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        body {
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+        /* Custom container */
+        .container-narrow {
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        .container-narrow > hr {
+            margin: 30px 0;
+        }
+        /* Main marketing message and sign up button */
+        .jumbotron {
+            margin: 60px 0;
+            text-align: center;
+        }
+        .jumbotron h1 {
+            font-size: 72px;
+            line-height: 1;
+        }
+        .jumbotron .btn {
+            font-size: 21px;
+            padding: 14px 24px;
+        }
+        /* Supporting marketing content */
+        .marketing {
+            margin: 60px 0;
+        }
+        .marketing p + h4 {
+            margin-top: 28px;
+        }
+    </style>
+    <!-- TODO: make sure bootstrap-responsive.min.css points to BootTheme
+        generated file -->
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+	<link href='main.css' rel='stylesheet'>
+	<script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
+</head>
+
+<body>
+    <div class="container-narrow">
+        <div class="masthead">
+            <ul class="nav nav-pills pull-right">
+                <li>
+                    <a href="#About">About</a>
+                </li>
+                <li>
+                    <a href="#Team">Team</a>
+                </li>
+                <li>
+                    <a href="#Contact">Contact</a>
+                </li>
+				<li>
+					<input id="uemail" type="email" placeholder="Email" />
+				</li>
+				<li>
+					<input id="upass"  type="password" placeholder="Password" />
+				</li>
+				<li>
+					<input id="signin"  class="btn btn-success" type="submit" value="Sign In" />
+					
+				</li>
+				<li>
+					<p id="oopssignin" style="display:none;">&nbsp;&nbsp;&nbsp;Wrong username or password</p>		
+				</li>
+				<li>
+					<a id="login" href="profile.html" style="display:none;">Welcome!</a>
+				</li>
+				<li>
+					<input id="logout"  class="btn btn-success" type="submit" value="Logout" style="display:none;" />
+					
+				</li>
+				
+            </ul>
+            <h3 class="muted"><br></h3>
+
+        </div>
+        <hr>
+        <div class="jumbotron">
+            <h1>Scaniton</h1>
+
+            <p class="lead">we are scan it on!!</p>
+            <div id="divsignup">
+			<h3>Sign in</h3>
+				<form id="signupform">
+				<div>
+					<input id="sname" type="text" placeholder="Full Name" />
+					<input id="semail" type="email" placeholder="Email" />
+					<input id="spass"  type="password" placeholder="Password" />
+				</div>
+				<input id="signup"  class="btn btn-large btn-success" value="Sign up today" />
+			</form>
+			</div>
+			<div id="tysignup" style="display:none;">
+			<h3>Thank you for registering. Please verify your email</h3>
+			</div>
+			<div id="oopssignup" style="display:none;">
+			<h3>Oops! Something went wrong. Please refresh the page and try again.</h3>
+			</div>
+        </div>
+        <hr>
+         <div id="About" class="jumbotron">
+            <h1>About</h1>
+
+            <p class="lead">Provide your recipients with a quick an easy way to let you know they got your package, providing you with the most direct delivery confirmation.</p>
+            </div>
+       
+        <div class="row-fluid marketing">
+            <div class="span4">
+                <h4>Print and Pack</h4>
+
+                <p>Customize and print your QR codes. Slip it in your package. And ship it off.</p>
+            </div>    
+            <div class="span4">
+                <h4>Scan</h4>
+
+                <p>The recipient opens the package, pulls out the QR code slip, and scans with any code reader smartphone app.</p>
+                
+            </div>
+            <div class="span4">
+                <h4>Confirm</h4>
+
+                <p>As soon as their phone scans the code, you’ll be notified.</p>
+                
+            </div>
+        </div>
+        <hr>
+    <!--
+		<div>
+         <div id="Team" class="jumbotron">
+            <h1>Team</h1>
+         </div>    
+        <div class="row-fluid marketing">
+            <div class="span4">
+                <h4>Pallav Rustogi</h4>     
+            </div>    
+            <div class="span4">
+                <h4>Mark Kirzon</h4>
+            </div>
+            <div class="span4">
+                <h4>Sanket Chauhan</h4>
+            </div>
+        </div>
+		</div>
+	-->
+        <hr>
+		<div>
+		<div id="Contact" class="jumbotron">
+            <h1>Contact</h1>
+			<div class="row">
+		
+		<div class="span6">
+			<h2>We would love to hear your feedback!</h2>
+		</div>
+		<div class="span6">
+			<ul>
+			  <li >
+			    <input  type="text" placeholder="Name" />
+			  </li>
+			  <li>
+			    <input  type="email" placeholder="Email input" />
+			  </li>
+			  <li>
+			    <textarea  placeholder="Message"></textarea>
+			  </li>
+			</ul>
+			<div class="default btn"><a href="">Submit</a></div>
+			</br>	
+		</div>	
+	</div>
+         </div>
+		 </div>
+        <hr>
+        
+        <div class="footer">
+            <p>©Scaniton 2013</p>
+        </div>
+    </div>
+    <!-- /container -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+    </script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src='main.js'></script>
+<script>
+$(function() {
+  $('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+</script>
+<script>
+$("#buttonProductionSummary").click(function(e) {
+    $("#productionForm").show();
+
+    e.preventDefault();
+});
+</script>
+<script type="text/javascript">
+		Parse.initialize("SN9RAjbHn5ofcwqjshAYG0jRZnxQrMgZ6Xj3rJWh", "HX9VdqSqHXGxBQqXMBFBCASVLUiWrkAC2WPI1Pcb");
+</script>
+<script type = "text/javascript">
+	$(document).ready(function(){
+				$('#signup').click(function() {
+					//console.log("hello");
+					var user = new Parse.User();
+					user.set("full_name", $("#sname").val());
+					user.set("password", $("#spass").val());
+					user.set("email", $("#semail").val());
+					user.set("username", $("#semail").val());
+					// other fields can be set just like with Parse.Object
+					//alert($("#sname").val() + $("#spass").val()+ $("#semail").val());
+					user.signUp(null, {
+					  success: function(user) {
+					 // alert('success');
+						console.log("pass");
+						$("#tysignup").show();
+						$("#divsignup").hide();
+						var currentUser = Parse.User.current();
+							if (currentUser) {
+							$("#login").html("Welcome! "+currentUser.attributes.full_name);
+							$("#login").show();
+							$("#logout").show();
+							$("#uemail").hide();
+							$("#upass").hide();
+							$("#signin").hide();
+							}
+					  },
+					  error: function(user, error) {
+						// Show the error message somewhere and let the user try again.
+					//	alert("Error: " + error.code + " " + error.message);
+						var codeString = '' + error.code;
+						Parse.Analytics.track('error', { code: codeString });
+						console.log("fail");
+						$("#oopssignup").show();
+						$("#divsignup").hide();
+					  }
+					});
+					console.log("hello");
+				});
+				
+			});
+	</script>
+		
+	<script type = "text/javascript">
+	$(document).ready(function(){
+				$('#signin').click(function() {
+					Parse.User.logIn($("#uemail").val(), $("#upass").val(), {
+						success: function(user) {
+							console.log("pass");
+							var currentUser = Parse.User.current();
+							if (currentUser) {
+							$("#login").html("Welcome! "+currentUser.attributes.full_name);
+							$("#login").show();
+							$("#logout").show();
+							$("#uemail").hide();
+							$("#upass").hide();
+							$("#signin").hide();
+							var url = document.location.toString();
+				if(url.match('id'))
+					{var qr_code=url.split('=')[1];
+				var Logger = Parse.Object.extend("qr_logger");
+					var logger = new Logger();
+					
+					
+					logger.set("createdBy", currentUser);
+					logger.set("qr_id", qr_code);					
+					logger.save(null, {
+					  success: function(logger) {
+						// Execute any logic that should take place after the object is saved.
+						//alert('New object created with objectId: ' + qrcode.id);
+						
+					  },
+					  error: function(logger, error) {
+						// Execute any logic that should take place if the save fails.
+						// error is a Parse.Error with an error code and description.
+						//alert('Failed to create new object, with error code: ' + error.description);
+					  }
+					});
+				}
+							}
+							//document.location.href = 'profile.html';
+						},
+						error: function(user, error) {
+							console.log("fail");
+							$("#oopssignin").show();
+						}
+					});
+				});
+			});
+	</script>
+	
+	<script type = "text/javascript">
+	$(document).ready(function(){
+				$('#logout').click(function() {
+					Parse.User.logOut();
+					$("#login").hide();
+					$("#logout").hide();
+					$("#uemail").show();
+					$("#upass").show();
+					$("#signin").show();
+				});
+			});
+	</script>
+	<script type = "text/javascript">
+	$(document).ready(function(){
+				var currentUser = Parse.User.current();
+				if (currentUser) {
+				console.log(currentUser.attributes.full_name);
+				$("#login").html("Welcome! "+currentUser.attributes.full_name);
+				$("#login").show();
+				$("#logout").show();
+				$("#uemail").hide();
+				$("#upass").hide();
+				$("#signin").hide();
+				var url = document.location.toString();
+				if(url.match('id'))
+					{var qr_code=url.split('=')[1];
+				var Logger = Parse.Object.extend("qr_logger");
+					var logger = new Logger();
+					
+					var Qrurl = Parse.Object.extend("qr_url");
+					var query = new Parse.Query(Qrurl);
+					query.get(qr_code, {
+					  success: function(qrurl) {
+								logger.set("createdBy", currentUser);
+								logger.set("qrid", qrurl);
+								console.log(qrurl.id);
+								logger.save(null, {
+								  success: function(logger) {
+									// Execute any logic that should take place after the object is saved.
+									//alert('New object created with objectId: ' + qrcode.id);
+									
+								  },
+								  error: function(logger, error) {
+									// Execute any logic that should take place if the save fails.
+									// error is a Parse.Error with an error code and description.
+									//alert('Failed to create new object, with error code: ' + error.description);
+								  }
+								});
+					  },
+					  error: function(object, error) {
+						// The object was not retrieved successfully.
+						// error is a Parse.Error with an error code and description.
+					  }
+					});
+					
+					
+					}
+				} else {
+				var url = document.location.toString();
+				if(url.match('id'))
+					{var qr_code=url.split('=')[1];
+				var Logger = Parse.Object.extend("qr_logger");
+					var logger = new Logger();
+					
+					
+					//logger.set("createdBy", currentUser);
+					logger.set("qr_id", qr_code);					
+					logger.save(null, {
+					  success: function(logger) {
+						// Execute any logic that should take place after the object is saved.
+						//alert('New object created with objectId: ' + qrcode.id);
+						
+					  },
+					  error: function(logger, error) {
+						// Execute any logic that should take place if the save fails.
+						// error is a Parse.Error with an error code and description.
+						//alert('Failed to create new object, with error code: ' + error.description);
+					  }
+					});
+				}
+				
+			}
+			});
+	</script>
+</body>
+
+</html>

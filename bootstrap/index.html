@@ -1,218 +1,369 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ScanItOn</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<head>
-    <meta charset="utf-8">
-    <title>Scaniton</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- TODO: make sure bootstrap.min.css points to BootTheme generated file
-        -->
-    <link href="bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-        body {
-            padding-top: 20px;
-            padding-bottom: 40px;
-        }
-        /* Custom container */
-        .container-narrow {
-            margin: 0 auto;
-            max-width: 1200px;
-        }
-        .container-narrow > hr {
-            margin: 30px 0;
-        }
-        /* Main marketing message and sign up button */
-        .jumbotron {
-            margin: 60px 0;
-            text-align: center;
-        }
-        .jumbotron h1 {
-            font-size: 72px;
-            line-height: 1;
-        }
-        .jumbotron .btn {
-            font-size: 21px;
-            padding: 14px 24px;
-        }
-        /* Supporting marketing content */
-        .marketing {
-            margin: 60px 0;
-        }
-        .marketing p + h4 {
-            margin-top: 28px;
-        }
-    </style>
-    <!-- TODO: make sure bootstrap-responsive.min.css points to BootTheme
-        generated file -->
-    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-    <!-- Fav and touch icons -->
-    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-	<link href='main.css' rel='stylesheet'>
-	<script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
-</head>
+        <!-- One CSS file that rules them all -->
+        <link href="css/main.css" rel="stylesheet">
 
-<body>
-    <div class="container-narrow">
-        <div class="masthead">
-            <ul class="nav nav-pills pull-right">
-                <li>
-                    <a href="#About">About</a>
-                </li>
-                <li>
-                    <a href="#Team">Team</a>
-                </li>
-                <li>
-                    <a href="#Contact">Contact</a>
-                </li>
-				<li>
-					<input id="uemail" type="email" placeholder="Email" />
-				</li>
-				<li>
-					<input id="upass"  type="password" placeholder="Password" />
-				</li>
-				<li>
-					<input id="signin"  class="btn btn-success" type="submit" value="Sign In" />
-					
-				</li>
-				<li>
-					<p id="oopssignin" style="display:none;">&nbsp;&nbsp;&nbsp;Wrong username or password</p>		
-				</li>
-				<li>
-					<a id="login" href="profile.html" style="display:none;">Welcome!</a>
-				</li>
-				<li>
-					<input id="logout"  class="btn btn-success" type="submit" value="Logout" style="display:none;" />
-					
-				</li>
-				
-            </ul>
-            <h3 class="muted"><br></h3>
-
-        </div>
-        <hr>
-        <div class="jumbotron">
-            <h1>Scaniton</h1>
-
-            <p class="lead">we are scan it on!!</p>
-            <div id="divsignup">
-			<h3>Sign in</h3>
-				<form id="signupform">
-				<div>
-					<input id="sname" type="text" placeholder="Full Name" />
-					<input id="semail" type="email" placeholder="Email" />
-					<input id="spass"  type="password" placeholder="Password" />
-				</div>
-				<input id="signup"  class="btn btn-large btn-success" value="Sign up today" />
-			</form>
-			</div>
-			<div id="tysignup" style="display:none;">
-			<h3>Thank you for registering. Please verify your email</h3>
-			</div>
-			<div id="oopssignup" style="display:none;">
-			<h3>Oops! Something went wrong. Please refresh the page and try again.</h3>
-			</div>
-        </div>
-        <hr>
-         <div id="About" class="jumbotron">
-            <h1>About</h1>
-
-            <p class="lead">Provide your recipients with a quick an easy way to let you know they got your package, providing you with the most direct delivery confirmation.</p>
-            </div>
-       
-        <div class="row-fluid marketing">
-            <div class="span4">
-                <h4>Print and Pack</h4>
-
-                <p>Customize and print your QR codes. Slip it in your package. And ship it off.</p>
-            </div>    
-            <div class="span4">
-                <h4>Scan</h4>
-
-                <p>The recipient opens the package, pulls out the QR code slip, and scans with any code reader smartphone app.</p>
-                
-            </div>
-            <div class="span4">
-                <h4>Confirm</h4>
-
-                <p>As soon as their phone scans the code, you’ll be notified.</p>
-                
-            </div>
-        </div>
-        <hr>
-		<div>
-         <div id="Team" class="jumbotron">
-            <h1>Team</h1>
-
-            
-         </div>
-       
-        <div class="row-fluid marketing">
-            <div class="span4">
-                <h4>Pallav Rustogi</h4>
-
-                
-            </div>    
-            <div class="span4">
-                <h4>Mark Kirzon</h4>
-
-                
-            </div>
-            <div class="span4">
-                <h4>Sanket Chauhan</h4>
-                
-            </div>
-        </div>
-		</div>
-		
-        <hr>
-		<div>
-		<div id="Contact" class="jumbotron">
-            <h1>Contact</h1>
-			<div class="row">
-		
-		<div class="spam6">
-			<h2>We would love to hear your feedback!</h2>
-		</div>
-		<div class="span6">
-			<ul>
-			  <li >
-			    <input  type="text" placeholder="Name" />
-			  </li>
-			  <li>
-			    <input  type="email" placeholder="Email input" />
-			  </li>
-			  <li>
-			    <textarea  placeholder="Message"></textarea>
-			  </li>
-			</ul>
-			<div class="default btn"><a href="">Submit</a></div>
-			</br>	
-		</div>	
-	</div>
-         </div>
-		 </div>
-        <hr>
+        <link rel="shortcut icon" href="images/favicon.ico">
         
-        <div class="footer">
-            <p>©Scaniton 2013</p>
+    <script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+        <!--[if lt IE 9]>
+          <script src="js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+  
+    
+    <!-- Scrollspy set in the body -->
+    <body id="home" data-spy="scroll" data-target=".main-nav" data-offset="73">
+
+    <!--///////////////////////////////////////// PARALLAX BACKGROUND ////////////////////////////////////////-->
+
+    <!-- image is set in the CSS as a background image -->
+    <div id="parallax"></div>
+
+    <!--///////////////////////////////////////// end PARALLAX BACKGROUND ////////////////////////////////////////-->
+
+
+    
+    <!--/////////////////////////////////////// NAVIGATION BAR ////////////////////////////////////////-->
+
+    <section id="header">
+
+        <nav class="navbar navbar-fixed-top" role="navigation">
+
+            <div class="navbar-inner">
+                <div class="container">
+
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#navigation"></button>
+
+                    <!-- Logo goes here - replace the image with your -->
+                    <a href="index.html" class="navbar-brand"><img src="img/logo.png" alt="ScanItOn"></a>
+
+
+                    <div class="collapse navbar-collapse main-nav" id="navigation">
+
+
+                        <ul class="nav pull-right">
+
+                            <!-- Menu items go here -->
+                            <li><a href="#features">About</a></li>
+                            <li><a href="#faq">Contact</a></li>
+                            <li><a href="#register">Sign In/Sign Up</a></li>
+        
+                            <!-- If you want sub-menu items, do them like this
+                            <li>
+                                <ul>
+                                  <li><a href="#">Item 1</a></li>
+                                  <li><a href="#">Item 2</a></li>
+                                </ul>
+                            </li> 
+                            You just need to delete these comment lines -->
+                        </ul>
+
+                    </div><!-- /nav-collapse -->
+                </div><!-- /container -->
+            </div><!-- /navbar-inner -->
+        </nav>
+
+    </section>
+
+    <!--//////////////////////////////////////// end NAVIGATION BAR ////////////////////////////////////////-->
+
+    
+
+    <!--/////////////////////////////////////// HERO SECTION ////////////////////////////////////////-->
+
+    <section id="hero">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-6 intro">
+                    <p style="padding-top:-30px;" class="lead">Giving the sender a personalized confirmation on receipt</p>
+                    <a href="#register" class="btn btn-hg btn-primary">Sign Up/Log In</a>
+                </div>
+
+            </div><!-- /row -->
+        </div><!-- /container -->
+
+    </section>
+
+    <!--///////////////////////////////////////////////// end HERO SECTION ////////////////////////////////////////-->
+
+
+
+    <!--/////////////////////////////////////// FEATURES SECTION ////////////////////////////////////////-->
+
+    <section id="features">
+
+        <div class="container">
+
+            <header>
+                <h1>About</h1>
+                <p class="lead">Provide your recipients with a quick an easy way to let you know they got your package, providing you with the most direct delivery confirmation.</p>
+            </header>
+
+            <div class="row">
+                
+                <!-- Feature Item 1 -->
+                <div class="col-md-4 text-center">
+                    <div class="feature-icon">
+                        <img src="img/step1.png" alt="" />
+                    </div>
+                    <h4>Print and Pack</h4>
+                    <p>Customize and print your QR codes. Slip it in your package. And ship it off.</p>
+                </div>
+
+                <!-- Feature Item 2 -->
+                <div class="col-md-4 text-center">
+                    <div class="feature-icon">
+                        <img src="img/step2.png" alt="" />
+                    </div>
+                    <h4>Scan</h4>
+                    <p>The recipient opens the package, pulls out the QR code slip, and scans with any code reader smartphone app.</p>
+                </div>
+
+                <!-- Feature Item 3 -->
+                <div class="col-md-4 text-center">
+                    <div class="feature-icon">
+                        <img src="img/step3.png" alt="" />
+                    </div>
+                    <h4>Confirm</h4>
+                    <p>As soon as their phone scans the code, you’ll be notified.</p>
+                </div>
+
+            </div><!-- /row -->
+        </div><!-- /container -->
+        <p></p><p></p>
+
+    </section>
+
+    <!--/////////////////////////////////////// end FEATURES SECTION ////////////////////////////////////////-->
+
+
+    <!--//////////////////////////////////////// NEWSLETTER SECTION ////////////////////////////////////////-->
+
+    <section id="register">
+
+        <div class="container">
+                <div class="row">
+
+                    <div class="col-md-6 pull-right gallery-popup">
+                        <h3 align ="center">Register </h3>
+                        <form id="signupform">
+                        <input type="text" id="sname" name="name" class="form-control input-hg" placeholder="Full Name" />
+                        <input type="text" id="semail" name="email" class="form-control input-hg" placeholder="Email" />
+                       
+                        <input type="password" class="form-control input-hg" id="spassword" placeholder="Password">
+                        <button id="signup" type="submit" class="btn btn-inverse btn-hg btn-block" name="submit">Sign Up!</button>
+                    </form>
+                    <div id="tysignup" style="display:none;">
+            <h3>Thank you for registering. Please verify your email</h3>
+            </div>
+            <div id="oopssignup" style="display:none;">
+            <h3>Oops! Something went wrong. Please refresh the page and try again.</h3>
+            </div>
+                    </div> 
+
+                    <div class="col-md-6 pull-left">
+                        <h3 align="center">Sign In! </h3>
+                        <form id="signin">
+                        <input type="text" id="email" name="email" class="form-control input-hg" placeholder="Email" />
+                        <input type="password" class="form-control input-hg" id="password" placeholder="Password">
+                        <button type="submit" class="btn btn-inverse btn-hg btn-block" name="submit">Sign In!</button>
+                    </form>
+                    </form> 
+                    </div> 
+
+                </div><!-- /row -->
+            </div><!-- /container -->
+
+    </section>
+    
+
+    <section id="faq">
+
+        <div class="container">
+
+            <header>
+                <h1>Contact Us!</h1>
+                <p class="lead">You have a question? Someone else might have had the exact same one. Let's find out!</p>
+            </header>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <!--////////// Accordion Toggle //////////-->
+                    <div class="panel-group" id="accordion">
+                     
+                        <!-- PANEL 1 -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                   Sample Question
+                                    </a>
+                                </h4>
+                            </div>
+                            
+                            <div id="collapseOne" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>Answer</p>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- PANEL 2 -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                    Sample Question
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>Answer</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PANEL 3 -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                    Sample Question
+                                    </a>
+                                </h4>
+                            </div>
+                            
+                            <div id="collapseThree" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>TAnswer/p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PANEL 4 -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                    Sample Question
+                                    </a>
+                                </h4>
+                            </div>
+                            
+                            <div id="collapseFour" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>Answer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <!--////////// end of Accordion Toggle //////////-->              
+
+                    
+
+                </div><!-- /col-md-6 -->
+
+                <div class="col-md-6">
+
+                    <div class="row contact-intro">
+                        <div class="col-md-3 text-right"><img src="images/icons/support.svg" alt="" /></div>
+                        <div class="col-md-9"><p class="lead">Didn't find what you were looking for or have some feedback? Shoot us a message!</p></div>                        
+                    </div>
+
+                    <!--////////// CONTACT FORM //////////-->
+                    <form id="contact-form">
+                        <input type="text" id="name" name="name" class="form-control input-hg" placeholder="Your name..." />
+                        <input type="text" id="email" name="email" class="form-control input-hg" placeholder="Your e-mail address..." />
+                        <textarea class="form-control input-hg" rows="4" id="message" name="message" placeholder="Your message..."></textarea>
+                        <button type="submit" class="btn btn-inverse btn-hg btn-block" name="submit">Send</button>
+                    </form>
+
+                     <div id="contact-error"></div>
+                    <!--////////// end CONTACT FORM ///////////-->
+
+                </div><!-- /col-md-6-->
+                
+            </div>
         </div>
-    </div>
-    <!-- /container -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
-    </script>
-    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-<script src='main.js'></script>
+
+    </section>
+
+    <!--/////////////////////////////////////// end FAQ SECTION ////////////////////////////////////////-->
+
+
+
+    <!--//////////////////////////////////////// TWITTER SECTION ////////////////////////////////////////-->
+
+
+
+    <!--//////////////////////////////////////// TWITTER SECTION ////////////////////////////////////////-->
+
+
+
+    <!--//////////////////////////////////////// FOOTER SECTION ////////////////////////////////////////-->
+    <section id="footer">
+        <div class="bottom-menu-inverse">
+
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Copyright &copy; 2013 ScanItOn.</p>
+                    </div>
+
+                    <!--<div class="col-md-6 social">
+                        <ul class="bottom-icons">
+                            <li>
+                              <a href="#" class="fui-facebook"></a>
+                            </li>
+                             <li>
+                              <a href="#" class="fui-twitter"></a>
+                            </li>
+                          </ul>                      
+                    </div>-->
+                </div>
+            
+            </div><!-- /row -->
+        </div><!-- /container -->
+
+    </section>
+
+    <!--//////////////////////////////////////// end FOOTER SECTION ////////////////////////////////////////-->
+
+
+
+    <!--//////////////////////////////////////// JAVASCRIPT LOAD ////////////////////////////////////////-->
+
+    <!-- Feel free to remove the scripts you are not going to use -->
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/jquery.magnific-popup.js"></script>
+    <script src="js/jquery.fitvids.min.js"></script>
+    <script src="assets/twitter/jquery.tweet.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+    <script src="js/custom.js"></script>
+    <script src='main.js'></script>
 <script>
 $(function() {
   $('a[href*=#]:not([href=#])').click(function() {
@@ -237,183 +388,185 @@ $("#buttonProductionSummary").click(function(e) {
 });
 </script>
 <script type="text/javascript">
-		Parse.initialize("SN9RAjbHn5ofcwqjshAYG0jRZnxQrMgZ6Xj3rJWh", "HX9VdqSqHXGxBQqXMBFBCASVLUiWrkAC2WPI1Pcb");
+        Parse.initialize("SN9RAjbHn5ofcwqjshAYG0jRZnxQrMgZ6Xj3rJWh", "HX9VdqSqHXGxBQqXMBFBCASVLUiWrkAC2WPI1Pcb");
 </script>
 <script type = "text/javascript">
-	$(document).ready(function(){
-				$('#signup').click(function() {
-					//console.log("hello");
-					var user = new Parse.User();
-					user.set("full_name", $("#sname").val());
-					user.set("password", $("#spass").val());
-					user.set("email", $("#semail").val());
-					user.set("username", $("#semail").val());
-					// other fields can be set just like with Parse.Object
-					//alert($("#sname").val() + $("#spass").val()+ $("#semail").val());
-					user.signUp(null, {
-					  success: function(user) {
-					 // alert('success');
-						console.log("pass");
-						$("#tysignup").show();
-						$("#divsignup").hide();
-						var currentUser = Parse.User.current();
-							if (currentUser) {
-							$("#login").html("Welcome! "+currentUser.attributes.full_name);
-							$("#login").show();
-							$("#logout").show();
-							$("#uemail").hide();
-							$("#upass").hide();
-							$("#signin").hide();
-							}
-					  },
-					  error: function(user, error) {
-						// Show the error message somewhere and let the user try again.
-					//	alert("Error: " + error.code + " " + error.message);
-						var codeString = '' + error.code;
-						Parse.Analytics.track('error', { code: codeString });
-						console.log("fail");
-						$("#oopssignup").show();
-						$("#divsignup").hide();
-					  }
-					});
-					console.log("hello");
-				});
-				
-			});
-	</script>
-		
-	<script type = "text/javascript">
-	$(document).ready(function(){
-				$('#signin').click(function() {
-					Parse.User.logIn($("#uemail").val(), $("#upass").val(), {
-						success: function(user) {
-							console.log("pass");
-							var currentUser = Parse.User.current();
-							if (currentUser) {
-							$("#login").html("Welcome! "+currentUser.attributes.full_name);
-							$("#login").show();
-							$("#logout").show();
-							$("#uemail").hide();
-							$("#upass").hide();
-							$("#signin").hide();
-							var url = document.location.toString();
-				if(url.match('id'))
-					{var qr_code=url.split('=')[1];
-				var Logger = Parse.Object.extend("qr_logger");
-					var logger = new Logger();
-					
-					
-					logger.set("createdBy", currentUser);
-					logger.set("qr_id", qr_code);					
-					logger.save(null, {
-					  success: function(logger) {
-						// Execute any logic that should take place after the object is saved.
-						//alert('New object created with objectId: ' + qrcode.id);
-						
-					  },
-					  error: function(logger, error) {
-						// Execute any logic that should take place if the save fails.
-						// error is a Parse.Error with an error code and description.
-						//alert('Failed to create new object, with error code: ' + error.description);
-					  }
-					});
-				}
-							}
-							//document.location.href = 'profile.html';
-						},
-						error: function(user, error) {
-							console.log("fail");
-							$("#oopssignin").show();
-						}
-					});
-				});
-			});
-	</script>
-	
-	<script type = "text/javascript">
-	$(document).ready(function(){
-				$('#logout').click(function() {
-					Parse.User.logOut();
-					$("#login").hide();
-					$("#logout").hide();
-					$("#uemail").show();
-					$("#upass").show();
-					$("#signin").show();
-				});
-			});
-	</script>
-	<script type = "text/javascript">
-	$(document).ready(function(){
-				var currentUser = Parse.User.current();
-				if (currentUser) {
-				console.log(currentUser.attributes.full_name);
-				$("#login").html("Welcome! "+currentUser.attributes.full_name);
-				$("#login").show();
-				$("#logout").show();
-				$("#uemail").hide();
-				$("#upass").hide();
-				$("#signin").hide();
-				var url = document.location.toString();
-				if(url.match('id'))
-					{var qr_code=url.split('=')[1];
-				var Logger = Parse.Object.extend("qr_logger");
-					var logger = new Logger();
-					
-					var Qrurl = Parse.Object.extend("qr_url");
-					var query = new Parse.Query(Qrurl);
-					query.get(qr_code, {
-					  success: function(qrurl) {
-								logger.set("createdBy", currentUser);
-								logger.set("qrid", qrurl);
-								console.log(qrurl.id);
-								logger.save(null, {
-								  success: function(logger) {
-									// Execute any logic that should take place after the object is saved.
-									//alert('New object created with objectId: ' + qrcode.id);
-									
-								  },
-								  error: function(logger, error) {
-									// Execute any logic that should take place if the save fails.
-									// error is a Parse.Error with an error code and description.
-									//alert('Failed to create new object, with error code: ' + error.description);
-								  }
-								});
-					  },
-					  error: function(object, error) {
-						// The object was not retrieved successfully.
-						// error is a Parse.Error with an error code and description.
-					  }
-					});
-					
-					
-					}
-				} else {
-				var url = document.location.toString();
-				if(url.match('id'))
-					{var qr_code=url.split('=')[1];
-				var Logger = Parse.Object.extend("qr_logger");
-					var logger = new Logger();
-					
-					
-					//logger.set("createdBy", currentUser);
-					logger.set("qr_id", qr_code);					
-					logger.save(null, {
-					  success: function(logger) {
-						// Execute any logic that should take place after the object is saved.
-						//alert('New object created with objectId: ' + qrcode.id);
-						
-					  },
-					  error: function(logger, error) {
-						// Execute any logic that should take place if the save fails.
-						// error is a Parse.Error with an error code and description.
-						//alert('Failed to create new object, with error code: ' + error.description);
-					  }
-					});
-				}
-				
-			}
-			});
-	</script>
-</body>
+    $(document).ready(function(){
+                $('#signup').click(function() {
+                    //console.log("hello");
+                    var user = new Parse.User();
+                    user.set("full_name", $("#sname").val());
+                    user.set("password", $("#spass").val());
+                    user.set("email", $("#semail").val());
+                    user.set("username", $("#semail").val());
+                    // other fields can be set just like with Parse.Object
+                    //alert($("#sname").val() + $("#spass").val()+ $("#semail").val());
+                    user.signUp(null, {
+                      success: function(user) {
+                     // alert('success');
+                        console.log("pass");
+                        $("#tysignup").show();
+                        $("#divsignup").hide();
+                        var currentUser = Parse.User.current();
+                            if (currentUser) {
+                            $("#login").html("Welcome! "+currentUser.attributes.full_name);
+                            $("#login").show();
+                            $("#logout").show();
+                            $("#uemail").hide();
+                            $("#upass").hide();
+                            $("#signin").hide();
+                            }
+                      },
+                      error: function(user, error) {
+                        // Show the error message somewhere and let the user try again.
+                    //  alert("Error: " + error.code + " " + error.message);
+                        var codeString = '' + error.code;
+                        Parse.Analytics.track('error', { code: codeString });
+                        console.log("fail");
+                        $("#oopssignup").show();
+                        $("#divsignup").hide();
+                      }
+                    });
+                    console.log("hello");
+                });
+                
+            });
+    </script>
+        
+    <script type = "text/javascript">
+    $(document).ready(function(){
+                $('#signin').click(function() {
+                    Parse.User.logIn($("#uemail").val(), $("#upass").val(), {
+                        success: function(user) {
+                            console.log("pass");
+                            var currentUser = Parse.User.current();
+                            if (currentUser) {
+                            $("#login").html("Welcome! "+currentUser.attributes.full_name);
+                            $("#login").show();
+                            $("#logout").show();
+                            $("#uemail").hide();
+                            $("#upass").hide();
+                            $("#signin").hide();
+                            var url = document.location.toString();
+                if(url.match('id'))
+                    {var qr_code=url.split('=')[1];
+                var Logger = Parse.Object.extend("qr_logger");
+                    var logger = new Logger();
+                    
+                    
+                    logger.set("createdBy", currentUser);
+                    logger.set("qr_id", qr_code);                   
+                    logger.save(null, {
+                      success: function(logger) {
+                        // Execute any logic that should take place after the object is saved.
+                        //alert('New object created with objectId: ' + qrcode.id);
+                        
+                      },
+                      error: function(logger, error) {
+                        // Execute any logic that should take place if the save fails.
+                        // error is a Parse.Error with an error code and description.
+                        //alert('Failed to create new object, with error code: ' + error.description);
+                      }
+                    });
+                }
+                            }
+                            //document.location.href = 'profile.html';
+                        },
+                        error: function(user, error) {
+                            console.log("fail");
+                            $("#oopssignin").show();
+                        }
+                    });
+                });
+            });
+    </script>
+    
+    <script type = "text/javascript">
+    $(document).ready(function(){
+                $('#logout').click(function() {
+                    Parse.User.logOut();
+                    $("#login").hide();
+                    $("#logout").hide();
+                    $("#uemail").show();
+                    $("#upass").show();
+                    $("#signin").show();
+                });
+            });
+    </script>
+    <script type = "text/javascript">
+    $(document).ready(function(){
+                var currentUser = Parse.User.current();
+                if (currentUser) {
+                console.log(currentUser.attributes.full_name);
+                $("#login").html("Welcome! "+currentUser.attributes.full_name);
+                $("#login").show();
+                $("#logout").show();
+                $("#uemail").hide();
+                $("#upass").hide();
+                $("#signin").hide();
+                var url = document.location.toString();
+                if(url.match('id'))
+                    {var qr_code=url.split('=')[1];
+                var Logger = Parse.Object.extend("qr_logger");
+                    var logger = new Logger();
+                    
+                    var Qrurl = Parse.Object.extend("qr_url");
+                    var query = new Parse.Query(Qrurl);
+                    query.get(qr_code, {
+                      success: function(qrurl) {
+                                logger.set("createdBy", currentUser);
+                                logger.set("qrid", qrurl);
+                                console.log(qrurl.id);
+                                logger.save(null, {
+                                  success: function(logger) {
+                                    // Execute any logic that should take place after the object is saved.
+                                    //alert('New object created with objectId: ' + qrcode.id);
+                                    
+                                  },
+                                  error: function(logger, error) {
+                                    // Execute any logic that should take place if the save fails.
+                                    // error is a Parse.Error with an error code and description.
+                                    //alert('Failed to create new object, with error code: ' + error.description);
+                                  }
+                                });
+                      },
+                      error: function(object, error) {
+                        // The object was not retrieved successfully.
+                        // error is a Parse.Error with an error code and description.
+                      }
+                    });
+                    
+                    
+                    }
+                } else {
+                var url = document.location.toString();
+                if(url.match('id'))
+                    {var qr_code=url.split('=')[1];
+                var Logger = Parse.Object.extend("qr_logger");
+                    var logger = new Logger();
+                    
+                    
+                    //logger.set("createdBy", currentUser);
+                    logger.set("qr_id", qr_code);                   
+                    logger.save(null, {
+                      success: function(logger) {
+                        // Execute any logic that should take place after the object is saved.
+                        //alert('New object created with objectId: ' + qrcode.id);
+                        
+                      },
+                      error: function(logger, error) {
+                        // Execute any logic that should take place if the save fails.
+                        // error is a Parse.Error with an error code and description.
+                        //alert('Failed to create new object, with error code: ' + error.description);
+                      }
+                    });
+                }
+                
+            }
+            });
+    </script>
 
+    <!--//////////////////////////////////////// end JAVASCRIPT LOAD ////////////////////////////////////////-->
+
+  </body>
 </html>
