@@ -97,7 +97,7 @@ $(document).ready(function() {
 
 
 	/* ========== TWITTER FEED ========== */
-	
+	/*
 	$("#tweets-feed").tweet({
 	  join_text: false,
 	  username: "envato", // Change username here
@@ -113,7 +113,7 @@ $(document).ready(function() {
 	  a_day_ago_text: "about a day ago",
 	  days_ago_text: "about %d days ago",
 	  view_text: "view tweet on twitter"
-	});
+	});*/
 
 	
 

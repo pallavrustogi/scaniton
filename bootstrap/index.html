@@ -10,7 +10,7 @@
 
         <link rel="shortcut icon" href="images/favicon.ico">
         
-    <script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
+		<script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
 
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
         <!--[if lt IE 9]>
@@ -54,8 +54,15 @@
                             <!-- Menu items go here -->
                             <li><a href="#features">About</a></li>
                             <li><a href="#faq">Contact</a></li>
-                            <li><a href="#register">Sign In/Sign Up</a></li>
-        
+							<li><a id="dashhead" href="profile.html" style="display:none;">Dashboard</a></li>
+                            <li id="register_btn"><a href="#register">Sign In/Sign Up</a></li>
+							<li>
+								<a id="login" href="profile.html" style="display:none;">Welcome!</a>
+							</li>
+							<li>
+								<input id="logout"  class="btn btn-success" type="submit" value="Logout" style="display:none;" />
+								
+							</li>
                             <!-- If you want sub-menu items, do them like this
                             <li>
                                 <ul>
@@ -152,17 +159,18 @@
     <section id="register">
 
         <div class="container">
-                <div class="row">
+                <div id="signinup" class="row">
 
                     <div class="col-md-6 pull-right gallery-popup">
+					<div id="divsignup">
                         <h3 align ="center">Register </h3>
                         <form id="signupform">
                         <input type="text" id="sname" name="name" class="form-control input-hg" placeholder="Full Name" />
-                        <input type="text" id="semail" name="email" class="form-control input-hg" placeholder="Email" />
-                       
-                        <input type="password" class="form-control input-hg" id="spassword" placeholder="Password">
-                        <button id="signup" type="submit" class="btn btn-inverse btn-hg btn-block" name="submit">Sign Up!</button>
+                        <input type="email" id="semail" name="email" class="form-control input-hg" placeholder="Email" />
+                        <input type="password" class="form-control input-hg" id="spass" placeholder="Password">
+                        <input type="button" id="signup" class="btn btn-inverse btn-hg btn-block" name="" value="Sign Up!"></input>
                     </form>
+					</div>
                     <div id="tysignup" style="display:none;">
             <h3>Thank you for registering. Please verify your email</h3>
             </div>
@@ -171,17 +179,20 @@
             </div>
                     </div> 
 
-                    <div class="col-md-6 pull-left">
+                    <div id="divsignin" class="col-md-6 pull-left">
                         <h3 align="center">Sign In! </h3>
                         <form id="signin">
-                        <input type="text" id="email" name="email" class="form-control input-hg" placeholder="Email" />
-                        <input type="password" class="form-control input-hg" id="password" placeholder="Password">
-                        <button type="submit" class="btn btn-inverse btn-hg btn-block" name="submit">Sign In!</button>
+                        <input type="email" id="uemail" name="email" class="form-control input-hg" placeholder="Email" />
+                        <input type="password" class="form-control input-hg" id="upass" placeholder="Password">
+                        <input type="button" class="btn btn-inverse btn-hg btn-block" value="Sign In!"></input>
                     </form>
-                    </form> 
+                     
                     </div> 
 
                 </div><!-- /row -->
+				<div id="dash" class="row" style="display:none;">
+					<h3>Click Here to Get Started : </h3><input type="button" class="btn btn-inverse btn-hg btn-block" onClick="location.href='profile.html'" value="Dashboard"></input>
+				</div>
             </div><!-- /container -->
 
     </section>
@@ -355,7 +366,7 @@
     <script src="js/jquery.isotope.min.js"></script>
     <script src="js/jquery.magnific-popup.js"></script>
     <script src="js/jquery.fitvids.min.js"></script>
-    <script src="assets/twitter/jquery.tweet.js"></script>
+    <!--<script src="assets/twitter/jquery.tweet.js"></script>-->
     <script src="js/bootstrap-select.js"></script>
     <script src="js/bootstrap-switch.js"></script>
     <script src="js/flatui-checkbox.js"></script>
@@ -393,7 +404,7 @@ $("#buttonProductionSummary").click(function(e) {
 <script type = "text/javascript">
     $(document).ready(function(){
                 $('#signup').click(function() {
-                    //console.log("hello");
+                    console.log("hello");
                     var user = new Parse.User();
                     user.set("full_name", $("#sname").val());
                     user.set("password", $("#spass").val());
@@ -407,14 +418,20 @@ $("#buttonProductionSummary").click(function(e) {
                         console.log("pass");
                         $("#tysignup").show();
                         $("#divsignup").hide();
+						$("#oopssignup").hide();
                         var currentUser = Parse.User.current();
                             if (currentUser) {
+							$("#register_btn").hide();
                             $("#login").html("Welcome! "+currentUser.attributes.full_name);
                             $("#login").show();
                             $("#logout").show();
                             $("#uemail").hide();
                             $("#upass").hide();
                             $("#signin").hide();
+							$("#divsignin").hide();
+							$("#signinup").hide();
+							$("#dash").show();
+							$("#dashhead").show();
                             }
                       },
                       error: function(user, error) {
@@ -441,12 +458,16 @@ $("#buttonProductionSummary").click(function(e) {
                             console.log("pass");
                             var currentUser = Parse.User.current();
                             if (currentUser) {
+							$("#register_btn").hide();
                             $("#login").html("Welcome! "+currentUser.attributes.full_name);
                             $("#login").show();
                             $("#logout").show();
                             $("#uemail").hide();
                             $("#upass").hide();
                             $("#signin").hide();
+							$("#signinup").hide();
+							$("#dash").show();
+							$("#dashhead").show();
                             var url = document.location.toString();
                 if(url.match('id'))
                     {var qr_code=url.split('=')[1];
@@ -490,6 +511,11 @@ $("#buttonProductionSummary").click(function(e) {
                     $("#uemail").show();
                     $("#upass").show();
                     $("#signin").show();
+					$("#register_btn").show();
+					$("#register").show();
+					$("#signinup").show();
+					$("#dash").hide();
+					$("#dashhead").hide();
                 });
             });
     </script>
@@ -498,12 +524,17 @@ $("#buttonProductionSummary").click(function(e) {
                 var currentUser = Parse.User.current();
                 if (currentUser) {
                 console.log(currentUser.attributes.full_name);
+				$("#register_btn").hide();
                 $("#login").html("Welcome! "+currentUser.attributes.full_name);
                 $("#login").show();
                 $("#logout").show();
                 $("#uemail").hide();
                 $("#upass").hide();
                 $("#signin").hide();
+				$("#signinup").hide();
+				$("#dash").show();
+				$("#dashhead").show();
+				
                 var url = document.location.toString();
                 if(url.match('id'))
                     {var qr_code=url.split('=')[1];
