@@ -218,7 +218,7 @@ $("#buttonProductionSummary").click(function(e) {
 <script type = "text/javascript">
     $(document).ready(function(){
                 $('#signup').click(function() {
-                    console.log("hello");
+                    
 					if($("#sname").val()=="")
 					{
 						$("#sname").show();
@@ -237,7 +237,7 @@ $("#buttonProductionSummary").click(function(e) {
                     user.signUp(null, {
                       success: function(user) {
                      // alert('success');
-                        console.log("pass");
+                        
                         $("#tysignup").show();
                         $("#divsignup").hide();
 						$("#oopssignup").hide();
@@ -262,12 +262,12 @@ $("#buttonProductionSummary").click(function(e) {
                     //  alert("Error: " + error.code + " " + error.message);
                         var codeString = '' + error.code;
                         Parse.Analytics.track('error', { code: codeString });
-                        console.log("fail");
+                        
                         $("#oopssignup").show();
                         $("#divsignup").hide();
                       }
                     });
-                    console.log("hello");
+                    
 				  }
                 });
                 
@@ -279,7 +279,7 @@ $("#buttonProductionSummary").click(function(e) {
                 $('#signin').click(function() {
                     Parse.User.logIn($("#semail").val(), $("#spass").val(), {
                         success: function(user) {
-                            console.log("pass");
+                            
                             var currentUser = Parse.User.current();
                             if (currentUser) {
 							$("#register_btn").hide();
@@ -319,7 +319,7 @@ $("#buttonProductionSummary").click(function(e) {
                             //document.location.href = 'profile.html';
                         },
                         error: function(user, error) {
-                            console.log("fail");
+                            
                             $("#oopssignin").show();
                         }
                     });
@@ -348,7 +348,7 @@ $("#buttonProductionSummary").click(function(e) {
     $(document).ready(function(){
                 var currentUser = Parse.User.current();
                 if (currentUser) {
-                console.log(currentUser.attributes.full_name);
+                
 				$("#register_btn").hide();
                 $("#tyuser").html("Thank You! "+currentUser.attributes.full_name);
                 $("#login").show();
@@ -372,7 +372,7 @@ $("#buttonProductionSummary").click(function(e) {
                       success: function(qrurl) {
                                 logger.set("createdBy", currentUser);
                                 logger.set("qrid", qrurl);
-                                console.log(qrurl.id);
+                                
                                 logger.save(null, {
                                   success: function(logger) {
                                     // Execute any logic that should take place after the object is saved.
