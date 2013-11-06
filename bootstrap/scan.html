@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ScanItOn</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- One CSS file that rules them all -->
+        <link href="css/main.css" rel="stylesheet">
+
+        <link rel="shortcut icon" href="images/favicon.ico">
+        
+		<script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+        <!--[if lt IE 9]>
+          <script src="js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+  
+    
+    <!-- Scrollspy set in the body -->
+    <body id="home" data-spy="scroll" data-target=".main-nav" data-offset="73">
+
+    <!--///////////////////////////////////////// PARALLAX BACKGROUND ////////////////////////////////////////-->
+
+    <!-- image is set in the CSS as a background image -->
+    
+    <!--///////////////////////////////////////// end PARALLAX BACKGROUND ////////////////////////////////////////-->
+
+
+    
+    <!--/////////////////////////////////////// NAVIGATION BAR ////////////////////////////////////////-->
+
+    <section id="header">
+
+        <nav class="navbar navbar-fixed-top" role="navigation">
+
+            <div class="navbar-inner">
+                <div class="container">
+
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#navigation"></button>
+
+                    <!-- Logo goes here - replace the image with your -->
+                    <a href="index.html" class="navbar-brand"><img src="img/logo.png" alt="ScanItOn"></a>
+
+
+                    <div class="collapse navbar-collapse main-nav" id="navigation">
+
+
+                        <ul class="nav pull-right">
+
+                            <!-- Menu items go here -->
+                            <li><a href="index.html">Home</a></li>
+                            
+							
+                            <!-- If you want sub-menu items, do them like this
+                            <li>
+                                <ul>
+                                  <li><a href="#">Item 1</a></li>
+                                  <li><a href="#">Item 2</a></li>
+                                </ul>
+                            </li> 
+                            You just need to delete these comment lines -->
+                        </ul>
+
+                    </div><!-- /nav-collapse -->
+                </div><!-- /container -->
+            </div><!-- /navbar-inner -->
+        </nav>
+
+    </section>
+
+    <!--//////////////////////////////////////// end NAVIGATION BAR ////////////////////////////////////////-->
+
+    
+
+    <!--/////////////////////////////////////// HERO SECTION ////////////////////////////////////////-->
+
+   
+
+    <!--/////////////////////////////////////// end FEATURES SECTION ////////////////////////////////////////-->
+
+
+    <!--//////////////////////////////////////// NEWSLETTER SECTION ////////////////////////////////////////-->
+
+    <section id="register">
+
+        <div class="container">
+                <div id="signinup" class="row">
+
+                    <div class="col-md-6 pull-right gallery-popup">
+					<div id="divsignup">
+					<div id="tyscan" style="display:none;">
+						<p>Thank you for using Scaniton. Sender has been notified.</p>
+					</div>
+                        <h3 align ="center">Login/Signup </h3>
+                        <form id="signupform">
+                        <input type="text" id="sname" name="name" style="display:none;" class="form-control input-hg" placeholder="Full Name" />
+                        <input type="email" id="semail" name="email" class="form-control input-hg" placeholder="Email" />
+                        <input type="password" class="form-control input-hg" id="spass" placeholder="Password">
+						<input type="button" id="signin" class="btn btn-inverse btn-hg btn-block" name="" value="Sign In!"></input>
+                        <input type="button" id="signup" class="btn btn-inverse btn-hg btn-block" name="" value="New User"></input>
+						
+                    </form>
+					</div>
+                    <div id="tysignup" style="display:none;">
+            <h3>Thank you for registering. Please verify your email</h3>
+            </div>
+            <div id="oopssignup" style="display:none;">
+            <h3>Oops! Something went wrong. Please refresh the page and try again.</h3>
+            </div>
+                    </div> 
+
+                    
+                </div><!-- /row -->
+				<div id="dash" class="row" style="display:none;">
+					<h3 id="tyuser">Thank You! </h3>
+					<input type="button" class="btn btn-inverse btn-hg btn-block" onClick="location.href='profile.html'" value="Dashboard"></input>
+					<input type="button" id="logout" class="btn btn-inverse btn-hg btn-block" value="Logout"></input>
+				</div>
+            </div><!-- /container -->
+
+    </section>
+    
+
+    
+
+    <!--/////////////////////////////////////// end FAQ SECTION ////////////////////////////////////////-->
+
+
+
+    <!--//////////////////////////////////////// TWITTER SECTION ////////////////////////////////////////-->
+
+
+
+    <!--//////////////////////////////////////// TWITTER SECTION ////////////////////////////////////////-->
+
+
+
+    <!--//////////////////////////////////////// FOOTER SECTION ////////////////////////////////////////-->
+    <section id="footer">
+        <div class="bottom-menu-inverse">
+
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Copyright &copy; 2013 ScanItOn.</p>
+                    </div>
+
+                    <!--<div class="col-md-6 social">
+                        <ul class="bottom-icons">
+                            <li>
+                              <a href="#" class="fui-facebook"></a>
+                            </li>
+                             <li>
+                              <a href="#" class="fui-twitter"></a>
+                            </li>
+                          </ul>                      
+                    </div>-->
+                </div>
+            
+            </div><!-- /row -->
+        </div><!-- /container -->
+
+    </section>
+
+    <!--//////////////////////////////////////// end FOOTER SECTION ////////////////////////////////////////-->
+
+
+
+    <!--//////////////////////////////////////// JAVASCRIPT LOAD ////////////////////////////////////////-->
+
+    <!-- Feel free to remove the scripts you are not going to use -->
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/jquery.magnific-popup.js"></script>
+    <script src="js/jquery.fitvids.min.js"></script>
+    <!--<script src="assets/twitter/jquery.tweet.js"></script>-->
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+    <script src="js/custom.js"></script>
+    <script src='main.js'></script>
+<script>
+$(function() {
+  $('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+</script>
+<script>
+$("#buttonProductionSummary").click(function(e) {
+    $("#productionForm").show();
+
+    e.preventDefault();
+});
+</script>
+<script type="text/javascript">
+        Parse.initialize("SN9RAjbHn5ofcwqjshAYG0jRZnxQrMgZ6Xj3rJWh", "HX9VdqSqHXGxBQqXMBFBCASVLUiWrkAC2WPI1Pcb");
+</script>
+<script type = "text/javascript">
+    $(document).ready(function(){
+                $('#signup').click(function() {
+                    console.log("hello");
+					if($("#sname").val()=="")
+					{
+						$("#sname").show();
+						$("#signin").hide();
+						$("#signup").val('Sign Up!')
+					}
+					else
+					{
+                    var user = new Parse.User();
+                    user.set("full_name", $("#sname").val());
+                    user.set("password", $("#spass").val());
+                    user.set("email", $("#semail").val());
+                    user.set("username", $("#semail").val());
+                    // other fields can be set just like with Parse.Object
+                    //alert($("#sname").val() + $("#spass").val()+ $("#semail").val());
+                    user.signUp(null, {
+                      success: function(user) {
+                     // alert('success');
+                        console.log("pass");
+                        $("#tysignup").show();
+                        $("#divsignup").hide();
+						$("#oopssignup").hide();
+                        var currentUser = Parse.User.current();
+                            if (currentUser) {
+							$("#register_btn").hide();
+                            $("#tyuser").html("Thank You! "+currentUser.attributes.full_name);
+                            $("#login").show();
+                            $("#logout").show();
+                            $("#uemail").hide();
+                            $("#upass").hide();
+                            $("#signin").hide();
+							$("#divsignin").hide();
+							$("#signinup").hide();
+							$("#dash").show();
+							$("#dashhead").show();
+							$("#tyscan").show();
+                            }
+                      },
+                      error: function(user, error) {
+                        // Show the error message somewhere and let the user try again.
+                    //  alert("Error: " + error.code + " " + error.message);
+                        var codeString = '' + error.code;
+                        Parse.Analytics.track('error', { code: codeString });
+                        console.log("fail");
+                        $("#oopssignup").show();
+                        $("#divsignup").hide();
+                      }
+                    });
+                    console.log("hello");
+				  }
+                });
+                
+            });
+    </script>
+        
+    <script type = "text/javascript">
+    $(document).ready(function(){
+                $('#signin').click(function() {
+                    Parse.User.logIn($("#semail").val(), $("#spass").val(), {
+                        success: function(user) {
+                            console.log("pass");
+                            var currentUser = Parse.User.current();
+                            if (currentUser) {
+							$("#register_btn").hide();
+                            $("#tyuser").html("Thank You! "+currentUser.attributes.full_name);
+                            $("#login").show();
+                            $("#logout").show();
+                            $("#uemail").hide();
+                            $("#upass").hide();
+                            $("#signin").hide();
+							$("#signinup").hide();
+							$("#dash").show();
+							$("#dashhead").show();
+							
+							var url = document.location.toString();
+                if(url.match('id'))
+                    {var qr_code=url.split('=')[1];
+                var Logger = Parse.Object.extend("qr_logger");
+                    var logger = new Logger();
+                    
+                    
+                    logger.set("createdBy", currentUser);
+                    logger.set("qr_id", qr_code);                   
+                    logger.save(null, {
+                      success: function(logger) {
+                        // Execute any logic that should take place after the object is saved.
+                        //alert('New object created with objectId: ' + qrcode.id);
+                        $("#tyscan").show();
+                      },
+                      error: function(logger, error) {
+                        // Execute any logic that should take place if the save fails.
+                        // error is a Parse.Error with an error code and description.
+                        //alert('Failed to create new object, with error code: ' + error.description);
+                      }
+                    });
+                }
+                            }
+                            //document.location.href = 'profile.html';
+                        },
+                        error: function(user, error) {
+                            console.log("fail");
+                            $("#oopssignin").show();
+                        }
+                    });
+                });
+            });
+    </script>
+    
+    <script type = "text/javascript">
+    $(document).ready(function(){
+                $('#logout').click(function() {
+                    Parse.User.logOut();
+                    $("#login").hide();
+                    $("#logout").hide();
+                    $("#uemail").show();
+                    $("#upass").show();
+                    $("#signin").show();
+					$("#register_btn").show();
+					$("#register").show();
+					$("#signinup").show();
+					$("#dash").hide();
+					$("#dashhead").hide();
+                });
+            });
+    </script>
+    <script type = "text/javascript">
+    $(document).ready(function(){
+                var currentUser = Parse.User.current();
+                if (currentUser) {
+                console.log(currentUser.attributes.full_name);
+				$("#register_btn").hide();
+                $("#tyuser").html("Thank You! "+currentUser.attributes.full_name);
+                $("#login").show();
+                $("#logout").show();
+                $("#uemail").hide();
+                $("#upass").hide();
+                $("#signin").hide();
+				$("#signinup").hide();
+				$("#dash").show();
+				$("#dashhead").show();
+				
+                var url = document.location.toString();
+                if(url.match('id'))
+                    {var qr_code=url.split('=')[1];
+                var Logger = Parse.Object.extend("qr_logger");
+                    var logger = new Logger();
+                    
+                    var Qrurl = Parse.Object.extend("qr_url");
+                    var query = new Parse.Query(Qrurl);
+                    query.get(qr_code, {
+                      success: function(qrurl) {
+                                logger.set("createdBy", currentUser);
+                                logger.set("qrid", qrurl);
+                                console.log(qrurl.id);
+                                logger.save(null, {
+                                  success: function(logger) {
+                                    // Execute any logic that should take place after the object is saved.
+                                    //alert('New object created with objectId: ' + qrcode.id);
+                                   
+									$("#tyscan").show();
+                                  },
+                                  error: function(logger, error) {
+                                    // Execute any logic that should take place if the save fails.
+                                    // error is a Parse.Error with an error code and description.
+                                    //alert('Failed to create new object, with error code: ' + error.description);
+                                  }
+                                });
+                      },
+                      error: function(object, error) {
+                        // The object was not retrieved successfully.
+                        // error is a Parse.Error with an error code and description.
+                      }
+                    });
+                    
+                    
+                    }
+                } else {
+                var url = document.location.toString();
+                if(url.match('id'))
+                    {var qr_code=url.split('=')[1];
+                var Logger = Parse.Object.extend("qr_logger");
+                    var logger = new Logger();
+                    
+                    
+                    //logger.set("createdBy", currentUser);
+                    logger.set("qr_id", qr_code);                   
+                    logger.save(null, {
+                      success: function(logger) {
+                        // Execute any logic that should take place after the object is saved.
+                        //alert('New object created with objectId: ' + qrcode.id);
+                        
+						$("#tyscan").show();
+                      },
+                      error: function(logger, error) {
+                        // Execute any logic that should take place if the save fails.
+                        // error is a Parse.Error with an error code and description.
+                        //alert('Failed to create new object, with error code: ' + error.description);
+                      }
+                    });
+                }
+                
+            }
+            });
+    </script>
+
+    <!--//////////////////////////////////////// end JAVASCRIPT LOAD ////////////////////////////////////////-->
+
+  </body>
+</html>
