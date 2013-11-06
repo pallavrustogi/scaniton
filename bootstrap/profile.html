@@ -152,7 +152,7 @@
 					  success: function(qrcode) {
 						// Execute any logic that should take place after the object is saved.
 						//alert('New object created with objectId: ' + qrcode.id);
-						$('#qrcode').qrcode("http://www.scaniton.com?id=" + qrcode.id);
+						$('#qrcode').qrcode("http://www.scaniton.com/scan.html?id=" + qrcode.id);
 					  },
 					  error: function(qrcode, error) {
 						// Execute any logic that should take place if the save fails.
