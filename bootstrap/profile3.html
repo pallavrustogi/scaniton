@@ -11,7 +11,7 @@
 
 	<body>
 		<!-- Navbar -->
-		<nav class="navbar navbar-inverse" role="navigation">
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		  <!-- Brand and toggle get grouped for better mobile display -->
 		  <div class="navbar-header">
 		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-id">
@@ -41,8 +41,7 @@
 		<!-- END Navbar -->
 
 		<!-- Start TO DO & Step 1-2-3 Sections -->
-		<div class="container">
-			<div class="row" style="">
+		<div class="generateqr-container" style="">
 				<div class="col-md-2 col-sm-3">
 					<div class="create-envelopes">
 						<ul class="nav nav-list">
@@ -56,30 +55,23 @@
 		            </div>
 				</div>
 				<div class="col-md-10 col-sm-9" style="">
-					<div class="create-envelopes" style="">
+					<div class="create-envelopes" style="height: 100%">
 						<div class="container">
-							<div class="col-lg-4">
-								<h1>Step 1</h1>
-				                <h4>Click here to create a QR Code</h4>
-				                <p class="">
-				                	<a id="generate" class="btn btn-primary btn-lg">Generate QR >></a> <div id="qrcode"></div>
-				                </p>
-				                <hr class="separator" id="phonevisible">
-				            </div>
-				            <div class="col-lg-5">
-				                <h1>Step 2</h1>
-								<h4>Customize your printed QR page</h4>
+				            <div class="col-md-7">
+				                <h1>Generate your Printout</h1>
+								<h4>Customize your message</h4>
 				                <div class="container">
+				                	<div style="display: none" id="qrholder"></div>
 									<div class="row clearfix">
 										<div class="col-md-12">
-											<form>
+											<form id="printfields">
 												<div class="form-group">
 													 <label for="pagetitle">Page Title</label>
-													 <input type="text" class="form-control" id="pagetitle" placeholder="Insert Page Title">
+													 <input type="text" class="form-control" id="pagetitle" placeholder="Insert Page Title (e.g. package title)">
 												</div>
 												<div class="form-group">
 													 <label for="formmessage">Message</label>
-													 <textarea type="text" class="form-control" id="formmessage" placeholder="Insert optional message here"></textarea>
+													 <textarea type="text" class="form-control" id="formmessage" placeholder="Insert optional message here (e.g. instructions...)"></textarea>
 												</div>
 												<div class="form-group">
 													<label for="companylogo">Company Logo</label>
@@ -92,23 +84,22 @@
 										</div>
 									</div>
 								</div>
-				                <h3>Click here to print QR Code</h3>
 				                <p class="">
-				                    <a id="print" class="btn btn-primary btn-lg">Print QR >></a>
+				                    <a href="#frame1" id="preview-btn" class="btn btn-primary btn-lg">Preview & Print</a>
 				                </p>
-   				                <hr class="separator" id="phonevisible">
+				                <p class="help-block"> Click here to download an image file of your QR code to use in custom templates:
+				                    <a id="qrjpeg-btn" class="btn btn-success btn-xs" href="imgData" target="_blank" download="image.jpg">QR JPEG</a>
+				                </p>
 			                </div>
-							<div class="col-lg-2">
-				                <h1>Step 3</h1>
-				                <h4>Slip it in your package</h4>
-				            </div>
-				        </div>
+			            </div>
 					</div>
 				</div>
-			</div>
+		</div>
+		<div class="previewpdf-container" style="">
+			<iframe name='frame1' id="frame1" width="100%" height="100%" frameborder="0"></iframe>
 		</div>
 
-	<!-- JavaScript sources -->
+	<!-- JavaScript Sources sources -->
 	<script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src = "js/bootstrap.js"></script>
 	<script src = "http://code.jquery.com/jquery.js"></script>
@@ -117,6 +108,12 @@
 	<script type="text/javascript">
 		Parse.initialize("SN9RAjbHn5ofcwqjshAYG0jRZnxQrMgZ6Xj3rJWh", "HX9VdqSqHXGxBQqXMBFBCASVLUiWrkAC2WPI1Pcb");
 	</script>
+	<!-- JavaScript Sources for jsPDF -->
+
+	<script type="text/javascript" src="js/jsPDF/jspdf.js"></script>
+	<script type="text/javascript" src="js/jsPDF/jspdf.plugin.addimage.js"></script>
+	<script type="text/javascript" src="js/jsPDF/jspdf.plugin.standard_fonts_metrics.js"></script>
+
 	
 	<!-- User Check -->
 	<script type = "text/javascript">
@@ -125,67 +122,99 @@
 				if (currentUser) {
 				console.log(currentUser.attributes.full_name);
 				$("#user").html(currentUser.attributes.full_name);
-				}else
+				} else
 				{console.log("no user");}
 			});
 	</script>
 	
-	<!-- Print page -->
 	<script type = "text/javascript">
+	// Create QR & Generate Preview PDF
 	$(document).ready(function(){
-		$('#print').click(function(){
-			var pagetitle=document.getElementById('pagetitle').value;
-			var pagemessage=document.getElementById('formmessage').value;
-			var dataUrl = document.getElementById("qr").toDataURL()
+    	$('#preview-btn').click(function(){
+			var QrCode = Parse.Object.extend("qr_url");
+			var qrcode = new QrCode();
+			var currentUser = Parse.User.current();
+			qrcode.set("createdBy", currentUser);						 
+			qrcode.save(null, {
+			  success: function(qrcode) {
+				// Execute any logic that should take place after the object is saved.
+				//alert('New object created with objectId: ' + qrcode.id);
+				$('#qrholder').qrcode("http://www.scaniton.com/scan.html?id=" + qrcode.id);
+				var doc = new jsPDF();
+	    		var pagetitle=document.getElementById('pagetitle').value;
+				var pagemessage=document.getElementById('formmessage').value;
+				var imgData = document.getElementById('qr').toDataURL("image/jpeg");
 
-			var windowContent = '<!DOCTYPE html>';
-		    windowContent += '<html>'
-		    windowContent += "<head><title>Thanks for using Scaniton</title></head>";
-		    windowContent += '<body><h1 style="font-family: Verdana; font-size: 50px; text-align: center; margin-top: 45px">'+ pagetitle +'</h1>'
-		    windowContent += '<img src="' + dataUrl + '" style="display: block; margin-top: 30px; margin-left:10px; float: left">';
-		    windowContent += '<div style="margin-top: 30px"><span style="font:Arial; font-size: 20px; margin-left: 15px">'+ pagemessage +'</span></div>';
-		    windowContent += '</body>';
-		    windowContent += '</html>';
-			
-			   		    alert("In the Print Dialogue options, remove headers and footers from printing!")
+				// Design //		
+				doc.setFillColor(150,150,150);
+				doc.rect(-10, 10, 800, 13, 'F'); 
 
-			printMe=window.open();
-		    printMe.document.write(windowContent);
-		    printMe.print();
-		    printMe.close();
-		});
+				doc.setFillColor(190,190,190);
+				doc.rect(-10, 25, 800, 5, 'F'); 
+				doc.setFillColor(190,190,190);
+				doc.rect(-10, 32, 800, 1, 'F'); 
+				// Content //
+				doc.setFont("helvetica");
+				doc.setFontType("bolditalic");
+				doc.setFontSize(30);
+				doc.text(20, 20, pagetitle);
+				
+				doc.setFont("helvetica");
+				doc.setFontType("normal");
+				doc.setFontSize(22);
+				doc.text(20, 50, pagemessage);
+				
+				doc.addImage(imgData, 'JPEG', 55, 80, 100, 100);
 
-	// QR Generation //
-		$('#generate').click(function() {
-			$('#qrcode').html("");
-				var QrCode = Parse.Object.extend("qr_url");
-				var qrcode = new QrCode();
-				var currentUser = Parse.User.current();
-				qrcode.set("createdBy", currentUser);						 
-				qrcode.save(null, {
-				  success: function(qrcode) {
-					// Execute any logic that should take place after the object is saved.
-					//alert('New object created with objectId: ' + qrcode.id);
-					$('#qrcode').qrcode("http://www.scaniton.com/scan.html?id=" + qrcode.id);
-				  },
-				  error: function(qrcode, error) {
-					// Execute any logic that should take place if the save fails.
-					// error is a Parse.Error with an error code and description.
-					//alert('Failed to create new object, with error code: ' + error.description);
-			  }
-			});					
-		});
+				var string = doc.output('datauristring');
+				$('iframe').attr('src', string);
+				// $('iframe').style.setAttribute('height', auto);
+			  },
+			  error: function(qrcode, error) {
+				// Execute any logic that should take place if the save fails.
+				// error is a Parse.Error with an error code and description.
+				//alert('Failed to create new object, with error code: ' + error.description);
+		  	  }
+		  	});
+    	});
 	});
-    // Log Out //
+	// Create QR JPEG for User // 
+	$(document).ready(function(){
+    	$('#qrjpeg-btn').click(function(){
+			var imgData = document.getElementById('qr').toDataURL("image/jpeg");
+			$('#qrjpeg-btn').attr('href', imgData)
+    	});
+	});
 
+    // Log Out The User //
         $(document).ready(function(){
             $('#logout').click(function() {
                 Parse.User.logOut();
                 window.location.href="http://scaniton.com"
             });
         });
-	</script>
-	
+    </script>
+    
+    <!-- Scroll Animation -->
+    <script>
+      $(function() {
+        $('a[href*=#]:not([href=#])').click(function() {
+          if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
+            || location.hostname == this.hostname) {
+
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+            if (target.length) {
+              $('html,body').animate({
+                scrollTop: target.offset().top
+              }, 1000);
+              return false;
+            }
+          }
+        });
+      });
+    </script>
+
 	</body>
 
 </html>
