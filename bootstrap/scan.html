@@ -94,6 +94,18 @@
 					<div id="tyscan" style="display:none;">
 						<p>Thank you for using Scaniton. Sender has been notified.</p>
 					</div>
+					<div id="emailform" style="display:none;">
+						<form id="emailform">
+                        <label for="name" class="nameLabel">Name*</label>
+                          <input id="emailname" type="text" name="name" placeholder="Enter your name..." required>
+                        <label for="email" class="emailLabel">Email*</label>
+                          <input id="emailemail" type="text" name="email" placeholder="Enter your email..." required>
+                        <label for="subject">Subject*</label>
+                          <input id="emailsubject" type="text" name="subject" placeholder="Your subject..." required>
+                        <label for="message" class="messageLabel">Message*</label>
+                          <textarea id="emailmessage" name="message" placeholder="Your message..." required></textarea>
+                        </form>
+					</div>
                         <h3 align ="center">Login/Signup </h3>
                         <form id="signupform">
                         <input type="text" id="sname" name="name" style="display:none;" class="form-control input-hg" placeholder="Full Name" />
@@ -216,6 +228,38 @@ $("#buttonProductionSummary").click(function(e) {
         Parse.initialize("SN9RAjbHn5ofcwqjshAYG0jRZnxQrMgZ6Xj3rJWh", "HX9VdqSqHXGxBQqXMBFBCASVLUiWrkAC2WPI1Pcb");
 </script>
 <script type = "text/javascript">
+	$.fn.formToJSON = function() {
+				if($("#emailmessage").val()=="" || $("#emailemail").val() == "" || $("#emailname").val()=="")
+				{
+				var items = [];
+				items.push('<h2>All Fields are mandatory</h2>');
+				$('#result').html(items.join(''));
+				return null;
+				}
+				var objectGraph = {
+				"key": "_uDrbd5D5DcY7bx6zy24nw",
+				"message": {
+				"text": $("#emailmessage").val(),
+				"subject": "You package has been scanned",
+				"from_email": "noreply@scaniton.com",
+				"from_name": "ScanItOn",
+				"to": [
+				{
+					"email": $("#emailemail").val(),
+					"name": $("#emailname").val()
+				}
+				],
+				"headers": {
+				"Reply-To": "noreply@scaniton.com"
+			}
+		}
+	};
+				
+				
+				return JSON.stringify(objectGraph);
+			};
+	
+	
     $(document).ready(function(){
                 $('#signup').click(function() {
                     
@@ -301,12 +345,40 @@ $("#buttonProductionSummary").click(function(e) {
                     
                     
                     logger.set("createdBy", currentUser);
-                    logger.set("qr_id", qr_code);                   
+                    logger.set("qrid", qr_code);                   
                     logger.save(null, {
                       success: function(logger) {
                         // Execute any logic that should take place after the object is saved.
                         //alert('New object created with objectId: ' + qrcode.id);
-                        $("#tyscan").show();
+						var Qrown = Parse.Object.extend("qr_url");
+						var qrown = new Parse.Query(Qrown);
+						qrown.equalTo("objectId", url.split('=')[1]);
+						qrown.include("createdBy");
+						qrown.find({
+				  success: function(results) {
+					//alert("Successfully retrieved " + results.length + " scores.");
+					// Do something with the returned Parse.Object values
+						var curname = results[0].get("createdBy").get("full_name");
+						$("#emailmessage").val("You package number: "+url.split('=')[1]+" has been recently scanned by " + currentUser.attributes.full_name + ". Please visit www.scaniton.com to track your package. Thank you for using www.scaniton.com");
+						$("#emailname").val(curname);
+						$("#emailemail").val(results[0].get("createdBy").get("email"));
+						var send = $("#emailform").formToJSON();
+						$.ajax({
+						url: "https://mandrillapp.com/api/1.0/messages/send.json",
+						type: "POST",
+						data: send,
+						error: function(xhr, error) {
+							
+						},
+						success: function(data) {
+							//have you service return the created object
+							$("#tyscan").show();
+							
+						}			  
+					});
+						
+					}});
+                        
                       },
                       error: function(logger, error) {
                         // Execute any logic that should take place if the save fails.
@@ -378,7 +450,34 @@ $("#buttonProductionSummary").click(function(e) {
                                     // Execute any logic that should take place after the object is saved.
                                     //alert('New object created with objectId: ' + qrcode.id);
                                    
-									$("#tyscan").show();
+									var Qrown = Parse.Object.extend("qr_url");
+						var qrown = new Parse.Query(Qrown);
+						qrown.equalTo("objectId", url.split('=')[1]);
+						qrown.include("createdBy");
+						qrown.find({
+				  success: function(results) {
+					//alert("Successfully retrieved " + results.length + " scores.");
+					// Do something with the returned Parse.Object values
+						var curname = results[0].get("createdBy").get("full_name");
+						$("#emailmessage").val("You package number: "+url.split('=')[1]+" has been recently scanned by " + currentUser.attributes.full_name + ". Please visit www.scaniton.com to track your package. Thank you for using www.scaniton.com");
+						$("#emailname").val(curname);
+						$("#emailemail").val(results[0].get("createdBy").get("email"));
+						var send = $("#emailform").formToJSON();
+						$.ajax({
+						url: "https://mandrillapp.com/api/1.0/messages/send.json",
+						type: "POST",
+						data: send,
+						error: function(xhr, error) {
+							
+						},
+						success: function(data) {
+							//have you service return the created object
+							$("#tyscan").show();
+							
+						}			  
+					});
+						
+					}});
                                   },
                                   error: function(logger, error) {
                                     // Execute any logic that should take place if the save fails.
@@ -404,13 +503,40 @@ $("#buttonProductionSummary").click(function(e) {
                     
                     
                     //logger.set("createdBy", currentUser);
-                    logger.set("qr_id", qr_code);                   
+                    logger.set("qrid", qr_code);                   
                     logger.save(null, {
                       success: function(logger) {
                         // Execute any logic that should take place after the object is saved.
                         //alert('New object created with objectId: ' + qrcode.id);
                         
-						$("#tyscan").show();
+						var Qrown = Parse.Object.extend("qr_url");
+						var qrown = new Parse.Query(Qrown);
+						qrown.equalTo("objectId", url.split('=')[1]);
+						qrown.include("createdBy");
+						qrown.find({
+				  success: function(results) {
+					//alert("Successfully retrieved " + results.length + " scores.");
+					// Do something with the returned Parse.Object values
+						var curname = results[0].get("createdBy").get("full_name");
+						$("#emailmessage").val("You package number: "+url.split('=')[1]+" has been recently scanned. Please visit www.scaniton.com to track your package. Thank you for using www.scaniton.com");
+						$("#emailname").val(curname);
+						$("#emailemail").val(results[0].get("createdBy").get("email"));
+						var send = $("#emailform").formToJSON();
+						$.ajax({
+						url: "https://mandrillapp.com/api/1.0/messages/send.json",
+						type: "POST",
+						data: send,
+						error: function(xhr, error) {
+							
+						},
+						success: function(data) {
+							//have you service return the created object
+							$("#tyscan").show();
+							
+						}			  
+					});
+						
+					}});
                       },
                       error: function(logger, error) {
                         // Execute any logic that should take place if the save fails.
