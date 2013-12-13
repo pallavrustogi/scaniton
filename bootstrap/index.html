@@ -200,21 +200,21 @@
 
     <section id="faq">
 
-        <div class="container">
+        <div class="container" align="center">
 
             <header>
                 <h1>Contact Us!</h1>
                 <p class="lead">You have a question? Someone else might have had the exact same one. Let's find out!</p>
             </header>
 
-            <div class="row">
+            <div class="row" align="center">
 
-                <div class="col-md-6">
+                <!--<div class="col-md-6">
 
-                    <!--////////// Accordion Toggle //////////-->
+                    <!--////////// Accordion Toggle //////////--
                     <div class="panel-group" id="accordion">
                      
-                        <!-- PANEL 1 -->
+                        <!-- PANEL 1 --
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
@@ -231,7 +231,7 @@
                             </div>
                         </div>
                     
-                        <!-- PANEL 2 -->
+                        <!-- PANEL 2 --
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
@@ -247,7 +247,7 @@
                             </div>
                         </div>
 
-                        <!-- PANEL 3 -->
+                        <!-- PANEL 3 --
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
@@ -264,7 +264,7 @@
                             </div>
                         </div>
 
-                        <!-- PANEL 4 -->
+                        <!-- PANEL 4 --
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
@@ -281,28 +281,28 @@
                             </div>
                         </div>
                     </div> 
-                    <!--////////// end of Accordion Toggle //////////-->              
+                    <!--////////// end of Accordion Toggle //////////--          
 
                     
 
-                </div><!-- /col-md-6 -->
+                </div><!-- /col-md-6 -- -->
 
-                <div class="col-md-6">
+                <div class="col-md-6 col-md-offset-3" >
 
-                    <div class="row contact-intro">
-                        <div class="col-md-3 text-right"><img src="img/support.svg" alt="" /></div>
-                        <div class="col-md-9"><p class="lead">Didn't find what you were looking for or have some feedback? Shoot us a message!</p></div>                        
+                    <div class="row contact-intro" >
+                        <div class="col-md-3 text-right" align="center"><img src="img/support.svg" alt="" /></div>
+                        <div class="col-md-9" align="center"><p class="lead">Didn't find what you were looking for or have some feedback? Shoot us a message!</p></div>                        
                     </div>
 
                     <!--////////// CONTACT FORM //////////-->
-                    <form id="contact-form">
+                    <form id="contact-form" >
                         <input type="text" id="name" name="name" class="form-control input-hg" placeholder="Your name..." />
                         <input type="text" id="email" name="email" class="form-control input-hg" placeholder="Your e-mail address..." />
                         <textarea class="form-control input-hg" rows="4" id="message" name="message" placeholder="Your message..."></textarea>
-                        <button type="submit" class="btn btn-inverse btn-hg btn-block" name="submit">Send</button>
+                        <button id="input" class="btn btn-inverse btn-hg btn-block">Send</button>
                     </form>
-
-                     <div id="contact-error"></div>
+					<div id="result"></div>
+                     <div id="contact-error" ></div>
                     <!--////////// end CONTACT FORM ///////////-->
 
                 </div><!-- /col-md-6-->
@@ -597,7 +597,69 @@ $("#buttonProductionSummary").click(function(e) {
             }
             });
     </script>
-
+	<script>
+	$.fn.formToJSON = function() {
+				if($("#message").val()=="" || $("#email").val() == "" || $("#name").val()=="")
+				{
+				var items = [];
+				items.push('<h2>All Fields are mandatory</h2>');
+				$('#result').html(items.join(''));
+				return null;
+				}
+				var objectGraph = {
+				"key": "_uDrbd5D5DcY7bx6zy24nw",
+				"message": {
+				"text": $("#message").val(),
+				"subject": "Response Requested",
+				"from_email": $("#email").val(),
+				"from_name": $("#name").val(),
+				"to": [
+				{
+					"email": "rustogi@usc.edu",
+					"name": "Pallav"
+				},{
+					"email": "kirzon@usc.com",
+					"name": "Mark"
+				},{
+					"email": "sanke93@gmail.com",
+					"name": "Sanket"
+				}
+				],
+				"headers": {
+				"Reply-To": $("#email").val()
+			}
+		}
+	};
+				
+				
+				return JSON.stringify(objectGraph);
+			};
+			
+	$(document).ready(function(){
+				$('#input').click(function() {
+					var send = $("#contact-form").formToJSON();
+					if(send != null)
+					{
+					$.ajax({
+						url: "https://mandrillapp.com/api/1.0/messages/send.json",
+						type: "POST",
+						data: send,
+						error: function(xhr, error) {
+							
+						},
+						success: function(data) {
+							//have you service return the created object
+							var items = [];
+							items.push('<h2>Thank you for your email. We shall get back to you shortly.</h2>');
+							$('#result').html(items.join(''));
+							$('#contact-form').html("");
+						}
+					});
+					}
+					return false; 
+				});
+			});
+	</script>
     <!--//////////////////////////////////////// end JAVASCRIPT LOAD ////////////////////////////////////////-->
 
   </body>
