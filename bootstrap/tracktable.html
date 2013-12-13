@@ -55,7 +55,7 @@
                 <a class="brand" href="#">Scaniton</a>
                 <div class="nav-collapse collapse">
                     <p class="navbar-text pull-right">Logged in as
-                        <a id="user" href="#" class="navbar-link">Username</a>
+                        <a id="user" href="#" class="navbar-link"></a>
                     </p>
                     <ul class="nav">
                         <li class="active">
@@ -134,6 +134,7 @@
 				var htmlContent="";
 				query.equalTo("createdBy", currentUser);
 				query.include("createdBy");
+				
 				query.find({
 				  success: function(results) {
 					//alert("Successfully retrieved " + results.length + " scores.");
@@ -144,9 +145,10 @@
 					  console.log(object);
 					  var qr_log = Parse.Object.extend("qr_logger");
 					  var query = new Parse.Query(qr_log);
-					  query.equalTo("qrid", object.id);
+					  query.equalTo("qrid", object);
 					  query.include("createdBy");
-					  htmlContent+="<tr><td>"+object.id+"</td><td>"+"Created"+"</td><td>"+object.createdAt+"</td><td>"+object.get("createdBy").get("full_name")+"</td></tr>";
+					  query.include("qrid");
+					  htmlContent+="<tr><td>"+object.get("title")+"</td><td>"+"Created"+"</td><td>"+object.createdAt+"</td><td>"+object.get("createdBy").get("full_name")+"</td></tr>";
 					  query.find({
 						success: function(result) {
 						//alert("Successfully retrieved " + results.length + " scores.");
@@ -165,13 +167,13 @@
 							  console.log(dated.getFullYear());
 							 // username = getUsername(user_id);
 							 // console.log(username);
-							  htmlContent+="<tr><td>"+obj.get("qrid")+"</td><td>"+"Scanned"+"</td><td>"+dated+"</td><td>"+user_id+"</td></tr>";				  
+							  htmlContent+="<tr><td>"+obj.get("qrid").get("title")+"</td><td>"+"Scanned"+"</td><td>"+dated+"</td><td>"+user_id+"</td></tr>";				  
 						}
-						$("#main").html("<table border=\"1\" id=\"myTable\" class=\"tablesorter\"><tr><th>Name</th><th>Status</th><th>Date/Time</th><th>Signature</th></tr>"+htmlContent+"</table>");
-						$("#myTable").tablesorter(); 
+						$("#main").html("<table border=\"1\" id=\"myTable\" class=\"table table-bordered table-striped\" style=\"margin-top: 15px\"><tr><th>Name</th><th>Status</th><th>Date/Time</th><th>Signature</th></tr>"+htmlContent+"</table>");
+						
 					  }
 					  });
-					  $("#main").html("<table border=\"1\" id=\"myTable\" class=\"tablesorter\"><tr><th>Name</th><th>Status</th><th>Date/Time</th><th>Signature</th></tr>"+htmlContent+"</table>");
+					  $("#main").html("<table border=\"1\" id=\"myTable\" class=\"table table-bordered table-striped\" style=\"margin-top: 15px\"><tr><th>Name</th><th>Status</th><th>Date/Time</th><th>Signature</th></tr>"+htmlContent+"</table>");
 					  $("#myTable").tablesorter(); 
 					}
 					
