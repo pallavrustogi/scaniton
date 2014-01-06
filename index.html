@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tracking system | QR code | Delivery Confirmation">
+    <meta name="author" content="Mark Kirzon | Sanket Chauhan | Pallav Rustogi">
+    <link rel="shortcut icon" href="assets/img/favicon.png">
+
+    <title>ScanItOn | Home</title>
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/home-css.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+	
+	<script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
+
+  </head>
+
+  <body>
+
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">    
+        <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#"><b>ScanItOn</b></a>
+	        </div>
+	        <div class="collapse navbar-collapse ">
+	        	<ul class="nav navbar-nav navbar-right">
+	        		<li>
+	        			<a href="" id="login" style="display:inline-block">Log In</a>
+	        			<input id="logout"  class="btn btn-success" type="submit" value="Logout" style="display:none; margin-top: 0px" />
+	        		</li>
+	        	</ul>
+
+		        <ul class="nav navbar-nav navbar-left">
+		           	<li><a href="#howitworks">About</a></li>
+		            <li><a href="#contact">Contact</a></li>
+		            <li><a href="#register">Dashboard</a></li>
+		        </ul>
+	        </div>
+    	</div>
+    </nav>
+    <!-- /End of Navbar -->
+
+    <!-- Header/First Section -->
+	<div id="headerwrap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<h1>Create your own tracking & delivery confirmation system.<br/><br/>
+					For just about anything.</h1>
+					  	<div class="form-group form-inline" style="display:inline-block">
+					    	<input type="email" class="form-control" id="inputEmail" placeholder="Enter your email address" style="margin-right: 5px">
+						</div>
+						<input type="button" id="getStarted" class="btn btn-warning btn-lg" value="Get Started Now!" style="display:inline-block"/>
+				</div>
+				<div class="col-lg-6">
+					<img class="img-responsive hidden-xs hidden-sm hidden-md" src="assets/img/ipad-hand.png" alt="">
+				</div>			
+			</div>
+		</div>
+	</div>
+	<!-- /Header/First Section -->
+
+	<!-- How It Works -->
+	<div id="howitworks" class="container">
+		<div class="row mt centered">
+			<div class="col-lg-6 col-lg-offset-3">
+				<h1>How It Works<br/>It's as simple as 1-2-3</h1>
+				<h3>Provide your recipients with a quick and easy way to let you know they got your package, providing you with the most direct delivery confirmation.</h3>
+			</div>
+		</div>
+		
+		<div class="row mt centered">
+			<div class="col-lg-4">
+				<div class="feature-icon">
+					<img src="assets/img/step1.svg" width="180" alt="">
+				</div>
+				<h3>Pring & Pack</h3>
+				<p>Customize and print your QR codes. Slip them in your package. And ship them off.</p>
+			</div>
+			<div class="col-lg-4">
+				<div class="feature-icon">
+					<img src="assets/img/step2.svg" width="180" alt="">
+				</div>				
+				<h3>Scan</h3>
+				<p>The recipient opens the package, pulls out the QR code slip, and scans with any code reader smartphone app.</p>
+			</div>
+			<div class="col-lg-4">
+				<div class="feature-icon">
+					<img src="assets/img/step3.svg" width="180" alt="">
+				</div>				
+				<h3>Track & Confirm</h3>
+				<p>As soon as the code is scanned, you’ll be notified of where, when, and by whom.</p>
+			</div>
+		</div>
+	<hr>
+	</div>
+	
+	<!-- /How It Works-->
+
+	<!-- Register & Sign in -->
+	<div class="container" id="register">
+        <div id="signinup" class="row">
+            <div id="divsignin" class="col-lg-6">
+                <h1 align="center">Sign In</h1>
+                <form id="signinform">
+                    <input type="email" id="uemail" name="email" class="form-control" placeholder="Email" />
+                    <input type="password" id="upass" class="form-control" placeholder="Password">
+                    <input type="button" id="signin" class="btn btn-success btn-lg btn-signinup" value="Sign In"></input>
+            	</form>                     
+            </div> 
+            <div id="divsignup" class="col-lg-6">
+                <h1 align ="center">Register</h1>
+                <form id="signupform">
+                    <input type="text" id="sname" name="name" class="form-control" placeholder="Full Name" />
+                    <input type="email" id="semail" name="email" class="form-control" placeholder="Email" />
+                    <input type="password" class="form-control" id="spass" placeholder="Password">
+                    <input type="button" id="signup" class="btn btn-success btn-lg btn-signinup" name="" value="Sign Up!"></input>
+            	</form>
+            </div>
+        </div>
+        <div id="responseCodes">
+            <div id="oopssignup" class="col-lg-6" style="display:none;">
+    			<h3>Oops! Something went wrong. Please refresh the page and try again.</h3>
+    		</div>
+    		<div id="tysignup" class="col-lg-6" style="display:none;">
+        		<h3>Thank you for registering. Please verify your email</h3>
+   			</div>
+    	</div>
+		<div id="dash" class="container" style="display:none;">
+			<h3>Click here to go to your Dashboard:</h3>
+			<input type="button" class="btn btn-warning btn-block btn-lg" onClick="location.href='create.html'" value="Dashboard"></input>
+		</div>
+	</div>
+
+	<!-- /Register & Sign in -->
+
+	<!-- Contact Us -->
+	<div id="contact" class="container" style="height: 100%">
+	<hr>
+		<div class="row mt centered">
+			<div class="col-lg-6 col-lg-offset-3">
+				<h1>Have a question?<br/>Contact Us!</h1>
+				<form id="contact-form">
+                <input type="text" id="name" name="name" class="form-control" placeholder="Your name..." />
+                <input type="text" id="email" name="email" class="form-control" placeholder="Your e-mail address..." />
+                <textarea class="form-control input-hg" rows="4" id="message" name="message" placeholder="Your message..."></textarea>
+                <button type="submit" class="btn btn-info btn-lg" name="submit">Send</button>
+            </form>
+			</div>
+
+		</div>		
+		<div class="row mt centered">
+			
+		</div>
+	</div>
+	<!-- /Contact Us -->
+	
+	<hr>
+	<p class="centered">Copyright &copy; 2013 ScanItOn.</p>
+	
+
+    <script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        Parse.initialize("SN9RAjbHn5ofcwqjshAYG0jRZnxQrMgZ6Xj3rJWh", "HX9VdqSqHXGxBQqXMBFBCASVLUiWrkAC2WPI1Pcb");
+	</script>
+
+    <script type = "text/javascript">
+	$(document).ready(function(){
+		// Log in on Page Load //
+	    var currentUser = Parse.User.current();
+	    if (currentUser) {
+	    	loggedIn();
+	    	$('.navbar-left').find('li:nth-child(3)').html('<a href="create.html">Dashboard</a>');
+		}
+
+		// Sign in //
+		$('#signin').click(function() {
+	        Parse.User.logIn($("#uemail").val(), $("#upass").val(), {
+	            success: function(user) {
+	                console.log("signin_success");
+	                var currentUser = Parse.User.current();
+	                if (currentUser) {
+		                loggedIn();
+						$('.navbar-left').find('li:nth-child(3)').html('<a href="create.html">Dashboard</a>');
+						window.location.href="track.html"		               
+	                }
+	            },
+	            error: function(user, error) {
+	                console.log("signin_fail");
+	                $("#oopssignup").show();
+	            }
+	        });
+	    });
+
+		// Sign Up //
+		$('#signup').click(function() {
+	        console.log("hello");
+	        var user = new Parse.User();
+	        user.set("full_name", $("#sname").val());
+	        user.set("password", $("#spass").val());
+	        user.set("email", $("#semail").val());
+	        user.set("username", $("#semail").val());
+	        user.signUp(null, {
+	        	success: function(user) {
+		            console.log("signup_success");
+		            $("#tysignup").show();
+					$("#oopssignup").hide();
+		            var currentUser = Parse.User.current();
+	                if (currentUser) {
+		                loggedIn();
+						$('.navbar-left').find('li:nth-child(3)').html('<a href="create.html">Dashboard</a>');
+						window.location.href="create.html"
+	                }
+	          	},
+	          	error: function(user, error) {
+	            	var codeString = '' + error.code;
+	            	Parse.Analytics.track('error', { code: codeString });
+	            	console.log("signup_fail");
+	            	$("#oopssignup").show();
+	          	}
+	        });
+	    });
+
+		// Log out // 
+		$('#logout').click(function() {
+            loggedIn();
+            Parse.User.logOut();
+            $('#logout').hide();
+            $("#login").html('Log In');
+			$('.navbar-left').find('li:nth-child(3)').html('<a href="#register">Dashboard</a>');
+        });
+    });
+
+	$(document).ready(function() {
+		// Scrolling Effects //
+	  	$('a[href*=#]:not([href=#])').click(function() {
+	    	if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+	      		var target = $(this.hash);
+	      		target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+	      		if (target.length) {
+	        		$('html,body').animate({scrollTop: target.offset().top}, 1000);
+	        	return false;
+	      		}
+	    	}
+	  	});
+
+	  	// Get Started Button, react to Click //
+  		$('#getStarted').click(function() {
+  			event.preventDefault();
+  			$('html, body').animate({scrollTop: $("#register").offset().top}, 1000);
+  			var email = $('#inputEmail').val();
+  			$('#uemail').val(email);
+  			$('#semail').val(email);
+  			$('#upass').focus();
+  		});
+
+  		// Login link, top right, click //
+        $('#login').click(function() {
+        	event.preventDefault();
+      		$('#inputEmail').focus();
+      		$('#getStarted').val('Log in');
+      	});
+
+        // Top email input, react to Enter //
+      	$("#inputEmail").keyup(function(event){
+    		if(event.keyCode == 13){
+    			//event.preventDefault();
+        		$("#getStarted").click();
+    		}
+		});
+
+        // Sign in, react to Enter //
+		$("#upass").keyup(function(event){
+    		if(event.keyCode == 13){
+    			//event.preventDefault();
+        		$("#signin").click();
+    		}
+		});
+	});
+
+	function loggedIn() {
+	    var currentUser = Parse.User.current();
+		console.log(currentUser.attributes.full_name);
+	    $("#login").html("Welcome! "+currentUser.attributes.full_name);
+	    $("#logout").css("display","inline-block");
+	    $('#getStarted').toggle();
+	    $('#inputEmail').toggle()
+		$("#signinup").toggle();
+		$("#dash").toggle();
+	}
+
+    </script>
+
+
+  </body>
+</html>

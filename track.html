@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">  
+  <head>
+    <title>ScanItOn | View Your Packages</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.css" rel = "stylesheet">
+    <link href="css/dashboard-css.css" rel = "stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+
+    <script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
+
+  </head>
+
+  <body>
+<!-- Navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">    
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><b>ScanItOn</b></a>
+          </div>
+          <div class="collapse navbar-collapse ">
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                <a href="" id="login" style="display:inline-block"></a>
+                <input id="logout"  class="btn btn-success" type="submit" value="Logout" style="display:inline-block" />
+              </li>             
+            </ul>
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="create.html">Create</a></li>
+                <li><a href="#" class="active">Track</a></li>
+            </ul>
+          </div>
+      </div>
+    </nav>
+    <!-- /End of Navbar -->
+
+    <!-- Start TO DO & Step 1-2-3 Sections -->
+    <div class="generateqr-container" style="">
+      <div class="col-md-3 col-sm-3">
+        <div class="create-envelopes">
+          <ul class="nav nav-list">
+            <li class="nav-header">
+              Tasks
+            </li>
+            <li>
+              <a href="create.html">Create New</a>
+            </li>
+            <li class="active">
+              <a href="#">Track Packages</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-9 col-sm-9" style="">
+        <div class="create-envelopes" style="height: 100%">
+          <div class="container">
+            <h1 class="dashboard-title">Your Packages</h1>
+            <div id="tableControls" style="display:none">
+              <a href="#" id="loadNext" class="pull-right">Next&gt&gt</a>
+              <p class="pull-right" style="white-space:pre;">          </p>
+              <a href="#" id="loadPrev" class="pull-right">&lt&ltPrevious</a>
+            </div>
+              <div id="loadingContainer" class="text-center" style="margin-top: 100px; padding-bottom: 100px"></div>
+              <div class="table-responsive">
+                <table id="trackingtable" class="table" style="visibility: hidden; font-weight: 400">
+                  <col width="200">
+                  <col width="150">
+                  <col width="120">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Tracking Number</th>
+                      <th>Scanned</th>
+                      <th>Date/Time</th>
+                      <th>Signature</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="qrholder" style="display:none">
+      <a id="qrjpegDownload" class="btn btn-success btn-xs" href="imgData" target="_blank" download="image.jpg">QR JPEG</a>
+    </div>
+
+  <script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src = "js/bootstrap.js"></script>
+  <script src="js/jquery.qrcode.min.js" type="text/javascript"></script>
+  <script src = "js/spin.js"></script>
+  <script src="js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript">
+    Parse.initialize("SN9RAjbHn5ofcwqjshAYG0jRZnxQrMgZ6Xj3rJWh", "HX9VdqSqHXGxBQqXMBFBCASVLUiWrkAC2WPI1Pcb");
+  </script>
+  <script type = "text/javascript">
+    var qrid_results_saved = new Array();
+    var qrlog_results_replies = 0;
+    var spinner = null;
+    var currentUser = Parse.User.current();
+    //Pagination Variables //
+    var totalqr = 0;
+    var loadIndex = 0;
+    var rowsPerPage = 50;
+    var rowsOnCurrentPage = 0;
+
+    $(document).ready(function(){
+      if (currentUser) {
+        console.log(currentUser.get("full_name"));
+        $("#login").html(currentUser.get("full_name"));
+        buildTable(currentUser, loadIndex);
+      }
+      else {
+        window.location = "index.html";
+      }
+    });
+
+    function buildTable(currentUser, startIndex) {
+      $('#tableControls').hide();
+      $('#trackingtable').css("visibility","hidden");
+      $('table tbody').remove();
+      startSpinner();
+
+      var QrUrl = Parse.Object.extend("qr_url");
+      var qr_query = new Parse.Query(QrUrl);
+      qr_query.equalTo("createdBy", currentUser);
+      qr_query.include("createdBy");
+      qr_query.descending("createdAt")
+      qr_query.skip(startIndex);
+      qr_query.limit(rowsPerPage);
+      qr_query.count({
+        success: function(count) {
+          totalqr = count;
+
+          // Hide Table Controls //
+          console.log(startIndex);
+          if ((totalqr-startIndex) <= rowsPerPage) { 
+            $('#loadNext').hide();
+          }
+          else {
+            $('#loadNext').show();         
+          }
+          if (startIndex == 0) {
+            $('#loadPrev').hide();
+          } 
+          else {
+            $('#loadPrev').show()
+          }     
+        }
+      });
+
+      qr_query.find({
+        success: function(qrid_results) {
+          qrid_results_saved = qrid_results;
+          qrlog_results_replies = 0;
+          
+          var QrLogger = Parse.Object.extend("qr_logger");
+          var qrlog_query = new Parse.Query(QrLogger);
+          qrlog_query.descending("createdAt");
+          qrlog_query.include("createdBy");
+          qrlog_query.include("qrid");
+
+          for (var i = 0; i < qrid_results.length; i++) {
+            qrlog_query.equalTo("qrid", qrid_results_saved[i]);
+
+            qrlog_query.find({
+              success: logQueryCallback,
+              error: function(result, error){console.log(error)}
+            });
+          }
+        },
+        error: function(result, error) {console.log(error)}
+      });
+    }
+
+
+  function logQueryCallback(qrlog_results) {
+    qrlog_results_replies++;
+    // If log data exists, then: //
+    if (qrlog_results.length > 0) {
+      // Match qrid entry with qr log entry, to add property containing log data //
+      for (var j = 0; j < qrid_results_saved.length; j++) {
+        if (qrid_results_saved[j].id === qrlog_results[0].get("qrid").id) {
+          qrid_results_saved[j].logs = qrlog_results;
+          break;
+        }
+      }     
+    }
+    // Check when #(log query replies) = #(qrid entry calls), synchronous functions // 
+    if (qrlog_results_replies === qrid_results_saved.length) {
+      $('#loadingContainer').data('spinner').stop();
+      $('#loadingContainer').hide();
+      $('#trackingtable').css("visibility", "visible");
+      $('#tableControls').show();
+      var htmlContent = '';
+      for (var i = 0; i < qrid_results_saved.length; i++) {
+        // Define tool tip //
+        var toolTip;
+        if (qrid_results_saved[i].get("message") != '' && qrid_results_saved[i].get("message") != undefined) {
+
+          toolTip = "class='hasTooltip' message='"+qrid_results_saved[i].get("message") + "'>";
+        }
+        else {
+          toolTip = '>';
+        }
+
+        htmlContent="<tbody><tr><td style='word-wrap:break-word'" + toolTip +qrid_results_saved[i].get("title") + "</td><td><a href=''>"+qrid_results_saved[i].id+"</a></td><td class='text-center'><span class='glyphicon glyphicon-minus'/></td><td>"+qrid_results_saved[i].createdAt.toDateString()+" | " +qrid_results_saved[i].createdAt.toLocaleTimeString()+"</td><td>"+qrid_results_saved[i].get("createdBy").get("full_name")+"</td><td><span class='glyphicon glyphicon-trash trash-bin'></td></tr></tbody>";
+        $('#trackingtable').append(htmlContent);
+
+        if (qrid_results_saved[i].logs) {
+          for (var j = 0; j < qrid_results_saved[i].logs.length; j++) {
+            var qrlog_entry = qrid_results_saved[i].logs[j];
+            var dated = qrlog_entry.updatedAt.toDateString()+" | "+qrlog_entry.updatedAt.toLocaleTimeString();
+            try {
+              var user_id = qrlog_entry.get("createdBy").get("full_name");
+            }
+            catch(err) {
+              user_id="Unknown Scanner";
+            }
+            htmlContent="<tr style='color:green'><td>"+"</td><td></td><td>"+"Scanned"+"</td><td>"+dated+"</td><td>"+user_id+"</td><td></td></tr>";
+            $('#trackingtable > tbody:last').append(htmlContent);  
+          }
+        }
+      }
+      loadTableCompletion();
+    }
+  }
+  function loadTableCompletion() {
+    rowsOnCurrentPage = $('table tbody').length;
+    // Delete Specifc Rows & Data //    
+   $('table tr>td:nth-child(6)>span').click(function() {
+      var rowData = $(this).parent().parent();
+      var trackingNumber = rowData.find('td:nth-child(2)').text();
+      var deleteConfirm = confirm("Are you sure want to delete this tracking entry?");
+      if (deleteConfirm == true) {
+        rowData.parent().find('tr').fadeOut();
+        deleteQrId(trackingNumber);
+        rowsOnCurrentPage--;
+      }                 
+    });
+
+    // Regenerate and Download QR Jpeg on Click //
+    $('table tr').find('td:nth-child(2)').click(function() {
+      var trackingNumber = $(this).text();
+      console.log(trackingNumber);
+      $('#qrholder').empty();
+      $('#qrholder').qrcode("markkirzon.altervista.org/scan.html?id=" + trackingNumber);
+      var imgData = document.getElementById('qr').toDataURL("image/jpeg");
+      $(this).find('a').attr('target', "_blank");
+      $(this).find('a').attr('download',"image.jpg");
+      $(this).find('a').attr('href', imgData);
+    });
+
+    // Hover highlight effect //
+    $('table tbody').mouseover(function(){
+      $(this).addClass('table-hover');
+
+    });
+
+    $('table tbody').mouseout(function(){
+      $(this).removeClass('table-hover');
+    });
+
+    // Group batches //
+
+    // Group scans with creates //
+    $('table tbody').find('tr:contains("Scanned")').hide();
+    var numberScans;
+    for (var i = 0; i < $('table tbody').length; i++) {
+      var numberScans = $('table').find('tbody')[i].children.length - 1;
+      if (numberScans >= 1) {
+        $('table tbody').eq(i).find('tr:first>td:nth-child(3)').append(numberScans);
+        $('table tbody').eq(i).find('tr:first>td:nth-child(3)>span').toggleClass('glyphicon-minus glyphicon-chevron-right');
+        $('table tbody').eq(i).find('tr:first>td:nth-child(3)').css('cursor','pointer')
+      }
+    }
+    $('table tr>td:nth-child(3)').click(function() {
+      var test = $(this).parent().parent();
+      if($(test).find('tr').length > 1) {
+        $(test).find('tr:gt(0)').toggle();
+      }  
+      $(test).find('tr:first>td:nth-child(3)>span').toggleClass('glyphicon glyphicon-chevron-right glyphicon glyphicon-chevron-down');
+    });
+
+  } // *loadTableCompletion* //
+
+  // Delete QR id entry from Parse // 
+  function deleteQrId(trackingNumber) {
+    var QrUrl = Parse.Object.extend("qr_url");
+    var qr_query = new Parse.Query(QrUrl);
+    qr_query.get(trackingNumber, {
+      success: function(qridDelete) {
+        var QrLogger = Parse.Object.extend("qr_logger");
+        var qrlog_query = new Parse.Query(QrLogger);
+        qrlog_query.equalTo("qrid",qridDelete);
+        qrlog_query.find({
+          success: function(logresults) {
+            for (var i = 0; i < logresults.length; i++) {
+              logresults[i].destroy();
+            }
+            qridDelete.destroy();
+          },
+          error: function(result, error){
+            console.log('error in qrlog_query delete')
+          }
+        });
+      }
+    });
+  }
+  // Delete all QR id entries from Parse // 
+  function deleteQrAll() {
+    var QrUrl = Parse.Object.extend("qr_url");
+    var qr_query = new Parse.Query(QrUrl);
+    qr_query.find(currentUser, {
+      success: function(qridDelete) {
+        qridDelete.destroy();
+      }
+    });
+  }
+
+  // Loading Image while waiting for table //
+  function startSpinner() {
+    $('#loadingContainer').empty();
+    $('#loadingContainer').show();
+    var opts = {
+      lines: 15, // The number of lines to draw
+      length: 40, // The length of each line
+      width: 11, // The line thickness
+      radius: 0, // The radius of the inner circle
+      corners: 0.7, // Corner roundness (0..1)
+      rotate: 32, // The rotation offset
+      direction: 1, // 1: clockwise, -1: counterclockwise
+      color: '#1990d5', // #rgb or #rrggbb or array of colors
+      speed: 1.2, // Rounds per second
+      trail: 56, // Afterglow percentage
+      shadow: false, // Whether to render a shadow
+      hwaccel: false, // Whether to use hardware acceleration
+      className: 'spinner', // The CSS class to assign to the spinner
+      zIndex: 2e9, // The z-index (defaults to 2000000000)
+      top: 'auto', // Top position relative to parent in px
+      left: 'auto' // Left position relative to parent in px
+    };
+    var target = document.getElementById('loadingContainer');
+    var spinner = new Spinner(opts).spin(target);
+    $(target).data('spinner', spinner);
+  }
+
+  $(document).ready(function() {
+    $('#logout').click(function() {
+      Parse.User.logOut();
+      window.location.href="index.html"
+    });
+
+    // Load Next & Previous Pages //
+    $('#loadNext').click(function() {
+      loadIndex += rowsOnCurrentPage;
+      buildTable(currentUser, loadIndex);
+    }); 
+    $('#loadPrev').click(function() {
+      loadIndex -= rowsPerPage;
+      if (loadIndex < 0) {loadIndex = 0};
+      buildTable(currentUser, loadIndex);
+    });
+  });
+ 
+
+  </script>
+   
+</body>
+
+</html>
