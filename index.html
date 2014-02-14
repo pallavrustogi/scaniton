@@ -256,7 +256,7 @@
 	  	});
 
 	  	// Get Started Button, react to Click //
-  		$('#getStarted').click(function() {
+  		$('#getStarted').click(function(event) {
   			event.preventDefault();
   			$('html, body').animate({scrollTop: $("#register").offset().top}, 1000);
   			var email = $('#inputEmail').val();
@@ -266,7 +266,7 @@
   		});
 
   		// Login link, top right, click //
-        $('#login').click(function() {
+        $('#login').click(function(event) {
         	event.preventDefault();
       		$('#inputEmail').focus();
       		$('#getStarted').val('Log in');
