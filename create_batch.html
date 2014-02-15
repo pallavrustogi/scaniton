@@ -162,7 +162,7 @@
                 for (var j = 0; j < totalQrNum; j++) {
                   console.log(qrDataArray[j].id);
                   $('#qrholder').empty();
-                  $('#qrholder').qrcode("http://markkirzon.altervista.org/scan.html?id=" + qrDataArray[j].id);
+                  $('#qrholder').qrcode("http://www.scaniton.com/scan.html?id=" + qrDataArray[j].id);
                   imgDataArray[j] = document.getElementById('qr').toDataURL("image/jpeg");
                 }
                 pdfCreation(imgDataArray, qrDataArray);                
